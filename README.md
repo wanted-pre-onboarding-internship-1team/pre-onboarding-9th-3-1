@@ -1,46 +1,126 @@
-# Getting Started with Create React App
+# 원티드 프리온보딩 Week3 기업과제 - 플렉시스
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
 
-In the project directory, you can run:
+<br />
 
-### `npm start`
+## ✏️ 과제 설명
+주어진 데이터를 기반으로 시계열 차트 만들기
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<br />
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 💡 프로젝트 실행 방법
 
-### `npm test`
+```
+git clone https://github.com/wanted-pre-onboarding-internship-1team/pre-onboarding-9th-3-1.git
+npm install
+npm start
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<br />
 
-### `npm run build`
+## 📌 배포 링크
+http://wanted-intenship-project1.s3-website.ap-northeast-2.amazonaws.com/
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<br />
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🛠 기술 스택
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=white"/> <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"/> <img src="https://img.shields.io/badge/styled-component-DB7093?style=flat-square&logo=styled-components&logoColor=white"/> <img src="https://img.shields.io/badge/Axios-5A29E4?style=flat-square&logo=Axios&logoColor=white"/> <img src="https://img.shields.io/badge/React Router-CA4245?style=flat-square&logo=React Router&logoColor=white">
 
-### `npm run eject`
+<br />
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## 🎄 폴더 구조
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+📄 src
+├── App.js
+├── index.js
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+<br />
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## 👏 협업 방법
 
-## Learn More
+주된 커뮤니케이션 툴로 [**팀 노션**](https://www.notion.so/1-48d83304b94c42ad8352fcf6e7973b9f?pvs=4) 페이지와 **디스코드**, **Google meet**를 사용했습니다.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### **노션 페이지**
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. 팀원들의 코드를 분석하고, 그 중에서 Best Practice를 정리하였습니다.
+2. commit 컨벤션, git flow 전략, 네이밍을 정의하였습니다.
+3. 팀원들의 역할 분담, 일정 조율을 위해 활용되었습니다.
+
+### **Discord / Google Meet**
+
+팀원들의 의사소통 및 화면 공유를 통한 협업을 위해 활용되었습니다.
+
+<br />
+
+## ⭐️ 과제 구현 및 Best Practice 산정
+
+### 전반적인 프로젝트
+> - 
+> - 
+> - AWS S3를 통해 배포하여 CI/CD 자동화 배포를 구축
+
+<br />
+
+#### ✅ Assignment 1
+
+- 주어진 JSON 데이터의 key값(시간)을 기반으로 시계열 차트를 만들어주세요
+- 하나의 차트안에 Area 형태의 그래프와 Bar 형태의 그래프가 모두 존재하는 복합 그래프로 만들어주세요
+- Area 그래프의 기준값은 value_area 값을 이용해주세요
+- Bar 그래프의 기준값은 value_bar 값을 이용해주세요
+- 차트의 Y축에 대략적인 수치를 표현해주세요(예시 이미지 참고)
+
+![image](https://user-images.githubusercontent.com/65064563/224611161-6bd6cec3-b947-4801-a8e6-0a936d50d99f.png)
+
+>  **💡 Best Practice 산정 이유**
+> - 
+
+<br />
+    
+#### ✅ Assignment 2
+
+- 특정 데이터 구역에 마우스 호버시 id, value_area, value_bar 데이터를 툴팁 형태로 제공해주세요
+
+<br/>
+
+>  **💡 Best Practice 산정 이유**
+> - 
+> - 
+
+
+ #### ✅ Assignment 3
+
+- 필터링 기능을 구현해주세요, 필터링은 특정 데이터를 하이라이트 하는 방식으로 구현해주세요
+- 필터링 기능은 버튼 형태로 ID값(지역이름)을 이용해주세요
+- 필터링 시 버튼에서 선택한 ID값과 동일한 ID값을 가진 데이터 구역만 하이라이트 처리를 해주세요
+- 특정 데이터 구역을 클릭 시에도 필터링 기능과 동일한 형태로 동일한 ID값을 가진 데이터 구역을 하이라이트해주세요
+
+
+>  **💡 Best Practice 산정 이유**
+> - 
+
+<br />
+
+
+## 💗 팀원 소개
+
+<table>
+  <tbody>
+    <tr>
+      <td align="center"><a href="https://github.com/merrybmc"><img src="https://avatars.githubusercontent.com/u/65064563?v=4" width="100px;" alt=""/><br /><sub><b>조병민(팀장)</b></sub></a><br /></td>
+      <td align="center"><a href="https://github.com/sujeong-dev"><img src="https://avatars.githubusercontent.com/u/112826154?v=4" width="100px;" alt=""/><br /><sub><b>구수정</b></sub></a><br /></td>
+      <td align="center"><a href="https://github.com/rladygks329"><img src="https://avatars.githubusercontent.com/u/64533351?v=4" width="100px;" alt=""/><br /><sub><b>김요한</b></sub></a><br /></td>
+      <td align="center"><a href="https://github.com/sduu"><img src="https://avatars.githubusercontent.com/u/46313348?v=4" width="100px;" alt=""/><br /><sub><b>손혜수</b></sub></a><br /></td>
+     <tr/>
+     <td align="center"><a href="https://github.com/SeungYn"><img src="https://avatars.githubusercontent.com/u/66045666?v=4" width="100px;" alt=""/><br /><sub><b>유승윤</b></sub></a><br /></td>
+     <td align="center"><a href="https://github.com/lzns960"><img src="https://avatars.githubusercontent.com/u/78632299?v=4" width="100px;" alt=""/><br /><sub><b>박수지</b></sub></a><br /></td>
+     <td align="center"><a href="https://github.com/gong25"><img src="https://avatars.githubusercontent.com/u/60168937?v=4" width="100px;" alt=""/><br /><sub><b>신공섭</b></sub></a><br /></td>
+     <td align="center"><a href="https://github.com/dhsimpson"><img src="https://avatars.githubusercontent.com/u/12489026?v=4" width="100px;" alt=""/><br /><sub><b>윤동희</b></sub></a><br /></td>
+     <td align="center"><a href="https://github.com/dobidugi"><img src="https://avatars.githubusercontent.com/u/21123166?v=4" width="100px;" alt=""/><br /><sub><b>이유태</b></sub></a><br /></td>
+     <tr/>
+     
+  </tbody>
+</table>
