@@ -1,11 +1,11 @@
-interface ChartValue {
+type ChartValue = {
   id: string;
   value_area: number;
   value_bar: number;
-}
+};
 
-interface ChartList extends ChartValue {
-  key: Array<string>;
+interface ChartList {
+  [index: string]: ChartValue;
 }
 
 export type { ChartList };

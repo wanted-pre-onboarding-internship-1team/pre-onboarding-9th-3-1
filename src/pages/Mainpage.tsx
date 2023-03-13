@@ -1,17 +1,14 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Chart } from 'react-google-charts';
-import { ChartList } from '../models/interface.model';
+import { getChartData } from '../apis/api';
 
 export default function Mainpage() {
-  const [chartData, setChartData] = useState<ChartList>();
+  const [chartData, setChartData] = useState();
 
   useEffect(() => {
-    axios.get('/data/mock_data.json').then(response => {
-      if (response.data) {
-        const result = response.data;
-        setChartData(result.slice(0));
-      }
+    getChartData().then(data => {
+      console.log(data);
+      setChartData(data);
     });
   }, []);
 
