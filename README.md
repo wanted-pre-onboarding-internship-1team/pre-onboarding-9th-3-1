@@ -20,7 +20,7 @@ npm start
 <br />
 
 ## 📌 배포 링크
-http://wanted-intenship-project1.s3-website.ap-northeast-2.amazonaws.com/
+http://wanted-intenship-project2.s3-website.ap-northeast-2.amazonaws.com/
 
 <br />
 
