@@ -10,6 +10,82 @@ export default function Mainpage() {
   console.log(test);
   return (
     <div>
+      {/* <ApexCharts
+        type='line'
+        height='500'
+        width='500'
+        series={[
+          {
+            name: 'Column A',
+            type: 'column',
+            data: [21.1, 23, 33.1, 34, 44.1, 44.9, 56.5, 58.5],
+          },
+          {
+            name: 'Column B',
+            type: 'column',
+            data: [10, 19, 27, 26, 34, 35, 40, 38],
+          },
+          {
+            name: 'Line C',
+            type: 'line',
+            data: [1.4, 2, 2.5, 1.5, 2.5, 2.8, 3.8, 4.6],
+          },
+        ]}
+        options={{
+          theme: {
+            mode: 'dark',
+          },
+          chart: {
+            toolbar: {
+              show: false,
+            },
+          },
+          grid: { show: false },
+          stroke: {
+            curve: 'smooth',
+            width: 5,
+          },
+          xaxis: {
+            categories: [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016],
+          },
+          yaxis: [
+            {
+              seriesName: 'Column A',
+              axisTicks: {
+                show: true,
+              },
+              axisBorder: {
+                show: true,
+              },
+              title: {
+                text: 'Columns',
+              },
+            },
+            {
+              seriesName: 'Column A',
+              show: false,
+            },
+            {
+              opposite: true,
+              seriesName: 'Line C',
+              axisTicks: {
+                show: true,
+              },
+              axisBorder: {
+                show: true,
+              },
+              title: {
+                text: 'Line',
+              },
+            },
+          ],
+          colors: ['#99C2A2', '#C5EDAC', '#66C7F4'],
+          legend: {
+            horizontalAlign: 'left',
+            offsetX: 40,
+          },
+        }}
+      /> */}
       <ApexCharts
         height='500'
         width='1000'
@@ -24,102 +100,17 @@ export default function Mainpage() {
             type: 'area',
             data: test.areaValueList,
           },
+          {
+            name: 'id',
+            type: 'none',
+            data: test.idList,
+          },
         ]}
         options={{
-          yaxis: [
-            {
-              seriesName: 'bar',
-              axisTicks: {
-                show: true,
-              },
-              axisBorder: {
-                show: true,
-              },
-              title: {
-                text: 'area1',
-              },
-            },
-            {
-              opposite: true,
-              seriesName: 'area',
-              axisTicks: {
-                show: true,
-              },
-              axisBorder: {
-                show: true,
-              },
-              title: {
-                text: 'barList',
-              },
-            },
-            {
-              seriesName: 'id',
-              show: false,
-            },
-          ],
-          xaxis: {
-            categories: test.timeList,
+          dataLabels: {
+            enabled: false,
           },
-          colors: ['#99C2A2', '#66C7F4'],
-          tooltip: {
-            y: {
-              formatter: function (v) {
-                console.log(v);
-                return v + '123';
-              },
-            },
 
-            z: {
-              formatter: function (v) {
-                console.log(v);
-                return v + '123';
-              },
-            },
-            custom: function (options) {
-              console.log(options);
-              const index = options.dataPointIndex;
-              return `
-                  <ul class='arrow-box'>
-                  <li class='arrow-box__item'>
-                  ${test.timeList[index]}
-                    </li>
-                    <li class='arrow-box__item'>
-                      <div style="background:red; width:10px; height:10px; border-radius:10px"></div>
-                      <div>bar: </div>
-                      <div>${test.barValueList[index]}</div>
-                    </li>
-                    <li class='arrow-box__item'>
-                      <div style="background:blue; width:10px; height:10px; border-radius:10px"></div>
-                      <div>area: </div>
-                      <div>${test.areaValueList[index]}</div>
-                    </li>
-                    <li class='arrow-box__item'>
-                      
-                      <div>지역: </div>
-                      <div>${test.idList[index]}</div>
-                    </li>
-                  </ul>
-                `;
-            },
-          },
-        }}
-      />
-      {/* <ApexCharts
-        height='500'
-        width='1000'
-        series={[
-          {
-            name: 'bar',
-            type: 'column',
-            data: test.barValueList,
-          },
-          {
-            name: 'area',
-            type: 'area',
-            data: test.areaValueList,
-          },
-        ]}
-        options={{
           yaxis: [
             {
               seriesName: 'bar',
@@ -155,33 +146,8 @@ export default function Mainpage() {
             categories: test.timeList,
           },
           colors: ['#99C2A2', '#66C7F4', '#caa137'],
-          tooltip: {
-            y: {
-              formatter: function (v) {
-                console.log(v);
-                return v + '123';
-              },
-            },
-
-            z: {
-              formatter: function (v) {
-                console.log(v);
-                return v + '123';
-              },
-            },
-            custom: function (options) {
-              console.log(options);
-              return (
-                '<div class="arrow_box">' +
-                '<span>' +
-                '123' +
-                '</span>' +
-                '</div>'
-              );
-            },
-          },
         }}
-      /> */}
+      />
     </div>
   );
 }

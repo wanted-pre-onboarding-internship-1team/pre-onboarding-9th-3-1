@@ -60,7 +60,7 @@ export default function Mainpage() {
           xaxis: {
             categories: test.timeList,
           },
-          colors: ['#99C2A2', '#66C7F4'],
+          colors: ['#99C2A2', '#66C7F4', '#caa137'],
           tooltip: {
             y: {
               formatter: function (v) {
@@ -80,9 +80,6 @@ export default function Mainpage() {
               const index = options.dataPointIndex;
               return `
                   <ul class='arrow-box'>
-                  <li class='arrow-box__item'>
-                  ${test.timeList[index]}
-                    </li>
                     <li class='arrow-box__item'>
                       <div style="background:red; width:10px; height:10px; border-radius:10px"></div>
                       <div>bar: </div>
@@ -92,11 +89,6 @@ export default function Mainpage() {
                       <div style="background:blue; width:10px; height:10px; border-radius:10px"></div>
                       <div>area: </div>
                       <div>${test.areaValueList[index]}</div>
-                    </li>
-                    <li class='arrow-box__item'>
-                      
-                      <div>지역: </div>
-                      <div>${test.idList[index]}</div>
                     </li>
                   </ul>
                 `;

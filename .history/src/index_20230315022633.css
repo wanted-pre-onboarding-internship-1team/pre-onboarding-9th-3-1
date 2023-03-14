@@ -131,12 +131,8 @@ table {
 .arrow-box {
 }
 
-.arrow-box li {
-  padding: 5px 10px;
-}
-
-.arrow-box__item {
+.arrow_box__item {
   display: flex;
-  gap: 5px;
+  gap: 10px;
   align-items: center;
 }

@@ -127,16 +127,3 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-
-.arrow-box {
-}
-
-.arrow-box li {
-  padding: 5px 10px;
-}
-
-.arrow-box__item {
-  display: flex;
-  gap: 5px;
-  align-items: center;
-}

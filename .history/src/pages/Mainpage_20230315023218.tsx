@@ -60,7 +60,7 @@ export default function Mainpage() {
           xaxis: {
             categories: test.timeList,
           },
-          colors: ['#99C2A2', '#66C7F4'],
+          colors: ['#99C2A2', '#66C7F4', '#caa137'],
           tooltip: {
             y: {
               formatter: function (v) {
@@ -95,7 +95,7 @@ export default function Mainpage() {
                     </li>
                     <li class='arrow-box__item'>
                       
-                      <div>지역: </div>
+                      <div>id: </div>
                       <div>${test.idList[index]}</div>
                     </li>
                   </ul>
