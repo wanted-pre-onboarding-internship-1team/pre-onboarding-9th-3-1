@@ -1,20 +1,9 @@
-import useData from './../hooks/useData';
-import useGetData from './../hooks/useGetData';
+import useChartData from './../hooks/useChartData';
 import { ApexOptions } from 'apexcharts';
-import { useEffect } from 'react';
 import Chart from 'react-apexcharts';
 
 const ChartItem = () => {
-  const data = useData();
-  const getData = useGetData();
-
-  useEffect(() => {
-    !data && getData();
-  }, [data, getData]);
-
-  const categories = Object.keys(data || {});
-  const barData = Object.values(data || {}).map(data => data.value_bar);
-  const AreaData = Object.values(data || {}).map(data => data.value_area);
+  const { categories, barData, AreaData } = useChartData();
 
   const series = [
     {
