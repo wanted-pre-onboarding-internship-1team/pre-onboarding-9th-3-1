@@ -1,6 +1,6 @@
 import { SPLIT_AMOUNT } from '../../const/value';
 import { ChartData } from '../../interface/Data';
-import { calcBottom, createValueData } from '../../utils/value';
+import { calcPositionRatio, createValueData } from '../../utils/value';
 import styled from 'styled-components';
 
 export default function Bar({ dataList }: { dataList: ChartData[] }) {
@@ -17,7 +17,7 @@ export default function Bar({ dataList }: { dataList: ChartData[] }) {
       {barValues.map((value, idx) => {
         return (
           <BarText
-            style={{ bottom: calcBottom(idx, SPLIT_AMOUNT) }}
+            style={{ bottom: calcPositionRatio(idx, SPLIT_AMOUNT) }}
             key={value}>
             {value}
           </BarText>

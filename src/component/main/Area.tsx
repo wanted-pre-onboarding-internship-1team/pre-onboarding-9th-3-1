@@ -1,6 +1,6 @@
 import { SPLIT_AMOUNT } from '../../const/value';
 import { ChartData } from '../../interface/Data';
-import { createValueData, calcBottom } from '../../utils/value';
+import { createValueData, calcPositionRatio } from '../../utils/value';
 import styled from 'styled-components';
 
 export default function Area({ dataList }: { dataList: ChartData[] }) {
@@ -18,7 +18,7 @@ export default function Area({ dataList }: { dataList: ChartData[] }) {
       {areaValues.map((value, idx) => {
         return (
           <AreaText
-            style={{ bottom: calcBottom(idx, SPLIT_AMOUNT) }}
+            style={{ bottom: calcPositionRatio(idx, SPLIT_AMOUNT) }}
             key={value}>
             {value}
           </AreaText>
