@@ -64,10 +64,20 @@ export default function Charts() {
     plugins: {
       legend: {
         position: 'top' as const,
+        labels: {
+          font: {
+            size: 15,
+          },
+        },
       },
       title: {
         display: true,
         text: 'WEEK3 플렉시스',
+        padding: {
+          top: 10,
+          bottom: 10,
+        },
+        font: { weight: 'bold', size: 30 },
       },
     },
     interaction: {
