@@ -1,14 +1,20 @@
 import { MockAPI } from '../apis/MockAPI';
+import { RepositoryImpl } from '../apis/RepositoryImpl';
+import { Chart } from '../common/Chart';
 import React, { useEffect } from 'react';
 
-export default function Mainpage() {
+const Mainpage = () => {
   useEffect(() => {
     const mock = new MockAPI();
-    mock.fetchData().then(res => {
-      const timestamps = Object.keys(res || {});
-      console.log(timestamps);
-    });
+    const repo = new RepositoryImpl(mock);
   }, []);
 
-  return <div>Mainpage</div>;
-}
+  return (
+    <div>
+      Mainpage
+      <Chart />
+    </div>
+  );
+};
+
+export default Mainpage;

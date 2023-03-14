@@ -1,11 +1,11 @@
 import { ChartData } from './ChartData';
 
-export type DataResponse = Record<string, ChartData>;
+export type ChartMap = Record<string, ChartData>;
 
 export interface ApiResponse {
   type: string;
   version: number;
-  response: DataResponse;
+  response: ChartMap;
 }
 
 export interface API {
