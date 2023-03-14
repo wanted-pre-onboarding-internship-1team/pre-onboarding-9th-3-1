@@ -4,12 +4,10 @@ import reset from 'styled-reset';
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
-  html, body, #root{
+  html, body{
     height:100%;
     width:100%;
-    position:relative;
   }
-  
 `;
 
 function App() {
