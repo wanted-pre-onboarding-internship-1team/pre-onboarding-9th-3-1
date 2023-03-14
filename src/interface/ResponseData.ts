@@ -4,8 +4,11 @@ export interface DataResponse {
   response: { [key: string]: Data };
 }
 
-export interface Data {
-  id: ID;
+export interface Data extends DataValue {
+  id: string;
+}
+
+export interface DataValue {
   value_area: number;
   value_bar: number;
 }
