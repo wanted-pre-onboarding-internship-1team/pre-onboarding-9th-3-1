@@ -1,7 +1,7 @@
 import useDataList from '../../hooks/useDataList';
-import { calcPositionRatio } from '../../utils/value';
 import Area from './Area';
 import Bar from './Bar';
+import Data from './Data';
 import styled from 'styled-components';
 
 export default function Chart() {
@@ -19,33 +19,21 @@ export default function Chart() {
   }, 0);
   return (
     <ChartWrapper>
-      {/* <div>value_bar</div> */}
       <Area dataList={dataList} />
-      {/* <ChartDiv> */}
       <DataList>
-        {dataList.map(({ timestamp, data }, idx) => {
+        {dataList.map((chartData, idx) => {
           return (
-            <DataItem
-              style={{ left: calcPositionRatio(idx, dataList.length) }}
-              key={timestamp}>
-              <ChartData>
-                <DataBar
-                  style={{
-                    height: calcPositionRatio(data.value_bar, maxBar),
-                  }}
-                />
-                <DataArea
-                  style={{
-                    height: calcPositionRatio(data.value_area, maxArea),
-                  }}
-                />
-              </ChartData>
-              <DataText>{idx}</DataText>
-            </DataItem>
+            <Data
+              chartData={chartData}
+              maxBar={maxBar}
+              maxArea={maxArea}
+              idx={idx}
+              dataListLength={dataList.length}
+              key={chartData.timestamp}
+            />
           );
         })}
       </DataList>
-      {/* </ChartDiv> */}
       <Bar dataList={dataList} />
     </ChartWrapper>
   );
@@ -54,44 +42,10 @@ export default function Chart() {
 const ChartWrapper = styled.div`
   display: flex;
 `;
-// const ChartDiv = styled.div`
-//   border: solid black 1px;
-//   width: 500px;
-//   height: 500px;
-// `;
 const DataList = styled.ul`
   display: flex;
   width: 800px;
   height: 500px;
   border: solid black 1px;
   position: relative;
-`;
-const DataItem = styled.li`
-  position: relative;
-  font-size: 1px;
-  height: 100%;
-`;
-const ChartData = styled.div`
-  display: flex;
-  position: absolute;
-  bottom: 0;
-  width: 3px;
-  height: 100%;
-`;
-const DataBar = styled.div`
-  background-color: yellow;
-  width: 1.5px;
-  position: absolute;
-  bottom: 0;
-`;
-const DataArea = styled.div`
-  background-color: blue;
-  width: 1.5px;
-  left: 1.5px;
-  position: absolute;
-  bottom: 0;
-`;
-const DataText = styled.span`
-  position: absolute;
-  bottom: -10px;
 `;
