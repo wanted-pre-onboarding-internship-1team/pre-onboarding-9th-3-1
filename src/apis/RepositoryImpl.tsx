@@ -8,20 +8,31 @@ export class RepositoryImpl implements Repository {
   constructor(api: API) {
     this.api = api;
     this.datas = {};
+    this.init();
   }
+
   init(): void {
     this.api.fetchData().then(res => {
       this.datas = res.response;
     });
   }
+
   isEmpty(): boolean {
     return Object.keys(this.datas).length === 0;
   }
+
   getChartData(timeStamp: string): ChartData {
     if (this.isEmpty() === true) {
       this.init();
     }
 
     return this.datas[timeStamp];
+  }
+  getKeys(): string[] {
+    if (this.isEmpty() === true) {
+      this.init();
+    }
+
+    return Object.keys(this.datas);
   }
 }

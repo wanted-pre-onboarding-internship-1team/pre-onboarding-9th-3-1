@@ -4,10 +4,8 @@ import { Chart } from '../common/Chart';
 import React, { useEffect } from 'react';
 
 const Mainpage = () => {
-  useEffect(() => {
-    const mock = new MockAPI();
-    const repo = new RepositoryImpl(mock);
-  }, []);
+  const mock = new MockAPI();
+  const repo = new RepositoryImpl(mock);
 
   return (
     <div>
