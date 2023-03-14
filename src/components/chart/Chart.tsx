@@ -1,4 +1,4 @@
-import { useDataContext } from '../contexts/DataContext';
+import { useDataContext } from '../../contexts/DataContext';
 import {
   Chart as ChartJS,
   LinearScale,
@@ -7,7 +7,6 @@ import {
   PointElement,
   LineElement,
   Legend,
-  Tooltip,
   LineController,
   BarController,
   Filler,
@@ -23,7 +22,6 @@ ChartJS.register(
   PointElement,
   LineElement,
   Legend,
-  Tooltip,
   LineController,
   BarController,
   Filler,
@@ -46,14 +44,14 @@ export default function Charts() {
           target: 'start',
           above: 'rgba(72, 102, 82, 0.5)',
         },
-        yAxisID: 'y',
+        yAxisID: 'yArea',
         data: Object.values(dataValues).map(houlyData => houlyData.value_area),
       },
       {
         type: 'bar' as const,
         label: 'Bar',
         backgroundColor: '#fbb05c',
-        yAxisID: 'y1',
+        yAxisID: 'yBar',
         data: Object.values(dataValues).map(houlyData => houlyData.value_bar),
       },
     ],
@@ -66,7 +64,7 @@ export default function Charts() {
         position: 'top' as const,
         labels: {
           font: {
-            size: 15,
+            size: 17,
           },
         },
       },
@@ -93,17 +91,49 @@ export default function Charts() {
       },
     },
     scales: {
-      y: {
+      yArea: {
         type: 'linear' as const,
         display: true,
         position: 'left' as const,
         stacked: false,
+        ticks: {
+          font: {
+            size: 15,
+          },
+        },
+        title: {
+          display: true,
+          text: 'Area',
+          font: {
+            size: 15,
+          },
+        },
       },
-      y1: {
+      yBar: {
         type: 'linear' as const,
         display: true,
         position: 'right' as const,
         stacked: false,
+        ticks: {
+          font: {
+            size: 15,
+          },
+        },
+        title: {
+          display: true,
+          text: 'Bar',
+          font: {
+            size: 15,
+          },
+        },
+      },
+      x: {
+        ticks: {
+          font: {
+            size: 15,
+          },
+          display: true,
+        },
       },
     },
   };
