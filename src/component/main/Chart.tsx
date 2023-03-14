@@ -29,7 +29,7 @@ export default function Chart() {
               maxArea={maxArea}
               idx={idx}
               dataListLength={dataList.length}
-              key={chartData.timestamp + chartData.data.id}
+              key={chartData.timestamp}
             />
           );
         })}

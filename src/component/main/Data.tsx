@@ -32,7 +32,7 @@ export default function Data({
           }}
         />
       </DataWrapper>
-      <DataText>{'dd'}</DataText>
+      <DataText>{`${chartData.timestamp}`}</DataText>
     </DataItem>
   );
 }
@@ -47,19 +47,19 @@ const DataWrapper = styled.div`
   display: flex;
   position: absolute;
   bottom: 0;
-  width: 3px;
+  width: 10px;
   height: 100%;
 `;
 const DataBar = styled.div`
   background-color: yellow;
-  width: 1.5px;
+  width: 5px;
   position: absolute;
   bottom: 0;
 `;
 const DataArea = styled.div`
   background-color: blue;
-  width: 1.5px;
-  left: 1.5px;
+  width: 5px;
+  left: 5px;
   position: absolute;
   bottom: 0;
 `;

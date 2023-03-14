@@ -1,8 +1,9 @@
-import { Data } from './ResponseData';
+import { Data, DataValue } from './ResponseData';
 
 export interface ChartData {
   timestamp: string;
-  data: Data;
+  data: DataValue;
+  idSet: Set<string>;
 }
 
 export enum ID {
