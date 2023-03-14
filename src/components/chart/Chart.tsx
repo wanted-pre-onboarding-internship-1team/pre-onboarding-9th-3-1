@@ -3,6 +3,8 @@ import {
   Chart as ChartJS,
   LinearScale,
   CategoryScale,
+  TimeScale,
+  TimeSeriesScale,
   BarElement,
   PointElement,
   LineElement,
@@ -25,7 +27,9 @@ ChartJS.register(
   LineController,
   BarController,
   Filler,
-  Title
+  Title,
+  TimeScale,
+  TimeSeriesScale
 );
 
 export default function Charts() {
@@ -70,12 +74,13 @@ export default function Charts() {
       },
       title: {
         display: true,
-        text: 'WEEK3 플렉시스',
+        text: 'Flexsys',
         padding: {
           top: 10,
           bottom: 10,
         },
-        font: { weight: 'bold', size: 30 },
+        aling: 'center',
+        font: { weight: 'bold', size: 40 },
       },
     },
     interaction: {
@@ -133,7 +138,18 @@ export default function Charts() {
             size: 15,
           },
           display: true,
+          callback: function (index: any, value: any) {
+            return index !== 0 && index % 5 === 0
+              ? labels[index].split(' ')[1]
+              : '';
+          },
+          maxRotation: 0,
         },
+        grid: {
+          display: false,
+        },
+        labelOffset: 10,
+        mirror: true,
       },
     },
   };
