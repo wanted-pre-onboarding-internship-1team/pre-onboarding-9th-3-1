@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import DataService from '../services/dataService';
 
 export const DataContext = React.createContext<DataContextType>({
-  data: null,
+  data: {},
 });
 
 export function DataProvider({
@@ -19,7 +19,7 @@ export function DataProvider({
     dataService.fetchData().then(res => setData(res.response));
   }, [dataService]);
   return (
-    <DataContext.Provider value={{ data: data || null }}>
+    <DataContext.Provider value={{ data: data || {} }}>
       {children}
     </DataContext.Provider>
   );
