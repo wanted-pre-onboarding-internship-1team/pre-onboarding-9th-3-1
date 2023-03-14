@@ -4,8 +4,8 @@ type ChartValue = {
   value_bar: number;
 };
 
-interface ChartList {
-  [index: string]: ChartValue;
-}
+type ChartList = {
+  [key: string]: ChartValue;
+};
 
 export type { ChartList };

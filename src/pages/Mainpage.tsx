@@ -1,16 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Chart } from 'react-google-charts';
 import { getChartData } from '../apis/api';
+import useChartdata from '../hooks/useChartdata';
 
 export default function Mainpage() {
-  const [chartData, setChartData] = useState();
-
-  useEffect(() => {
-    getChartData().then(data => {
-      console.log(data);
-      setChartData(data);
-    });
-  }, []);
+  const chartData = useChartdata();
 
   return (
     <div style={{ width: '1200px', margin: '50px auto' }}>

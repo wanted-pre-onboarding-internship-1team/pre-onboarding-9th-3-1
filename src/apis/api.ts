@@ -1,29 +1,14 @@
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
+import { ChartList } from '../models/interface.model';
 
-type ChartValue = {
-  id: string;
-  value_area: number;
-  value_bar: number;
-};
-
-interface ChartList {
-  [index: string]: ChartValue;
-}
-
-async function getChartData() {
+export const getChartData = async () => {
   try {
-    const { data } = await axios.get('/data/mock_data.json');
-
-    return data;
+    return await axios.get('/data/mock_data.json');
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      console.log('error message: ', error.message);
       return error.message;
     } else {
-      console.log('unexpected error: ', error);
       return 'data error';
     }
   }
-}
-
-export { getChartData };
+};
