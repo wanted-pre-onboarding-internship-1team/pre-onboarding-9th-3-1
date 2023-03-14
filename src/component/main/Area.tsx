@@ -8,10 +8,24 @@ export default function Area({ dataList }: { dataList: ChartData[] }) {
   const maxArea = dataList.reduce((prev, curr) => {
     return Math.max(prev, curr.data.value_area);
   }, 0);
+
+  const areaValues = [];
+  const areaGap = (maxArea - minArea) / 9;
+  for (let i = 0; i <= 9; i++) {
+    areaValues.push(Math.round(minArea + i * areaGap));
+  }
+
   return (
     <ValueArea>
-      <MaxArea>max : {maxArea}</MaxArea>
-      <MinArea>min : {minArea}</MinArea>
+      {areaValues.map(value => {
+        return (
+          <AreaText
+            style={{ bottom: `${(value / maxArea) * 100}%` }}
+            key={value}>
+            {value}
+          </AreaText>
+        );
+      })}
     </ValueArea>
   );
 }
@@ -22,11 +36,8 @@ const ValueArea = styled.div`
   background-color: red;
   width: 200px;
 `;
-const MaxArea = styled.span`
+
+const AreaText = styled.span`
   position: absolute;
-  top: 0;
-`;
-const MinArea = styled.span`
-  position: absolute;
-  bottom: 0;
+  right: 0;
 `;
