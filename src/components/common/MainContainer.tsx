@@ -26,7 +26,7 @@ const MainSection = styled.section`
   width: calc(100% - 40px);
   max-width: 1000px;
   height: 700px;
-  padding: 20px;
+  padding: 40px 20px;
   border-radius: 8px;
   background-color: #fff;
   box-shadow: 0px 4px 20px #5b47bc4b;

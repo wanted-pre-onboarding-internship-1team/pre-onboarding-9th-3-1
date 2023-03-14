@@ -1,5 +1,5 @@
-import React from 'react';
+import ChartItem from '../components/ChartItem';
 
 export default function Mainpage() {
-  return <div>Mainpage</div>;
+  return <ChartItem />;
 }
