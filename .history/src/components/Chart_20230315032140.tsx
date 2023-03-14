@@ -53,14 +53,15 @@ export default function Chart() {
           },
           colors: ['#99C2A2', '#66C7F4'],
           tooltip: {
-            custom: (opt: any) =>
-              createCustomTooltip({
+            custom: (opt: any) => {
+              return createCustomTooltip({
                 opt,
                 timeList,
                 barValueList,
                 areaValueList,
                 idList,
-              }),
+              });
+            },
           },
         }}
       />
@@ -76,10 +77,10 @@ function createCustomTooltip({
   idList,
 }: {
   opt: any;
-  timeList: string[];
-  barValueList: number[];
-  areaValueList: number[];
-  idList: string[];
+  timeList: any;
+  barValueList: any;
+  areaValueList: any;
+  idList: any;
 }) {
   const index = opt.dataPointIndex;
   return `

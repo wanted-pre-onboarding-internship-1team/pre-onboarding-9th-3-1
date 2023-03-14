@@ -53,15 +53,37 @@ export default function Chart() {
           },
           colors: ['#99C2A2', '#66C7F4'],
           tooltip: {
-            custom: (opt: any) =>
-              createCustomTooltip({
-                opt,
-                timeList,
-                barValueList,
-                areaValueList,
-                idList,
-              }),
+            custom: (opt: any) => {
+              return createCustomTooltip(opt);
+            },
           },
+          // tooltip: {
+          //   custom: function (options) {
+          //     const index = options.dataPointIndex;
+          //     return `
+          // 	<ul class='arrow-box'>
+          // 		<li class='arrow-box__item'>
+          // 			${timeList[index]}
+          // 		</li>
+          // 		<li class='arrow-box__item'>
+          // 			<div style="background:${options.w.globals.colors[0]}; width:10px; height:10px; border-radius:10px"></div>
+          // 			<div>bar: </div>
+          // 			<div>${barValueList[index]}</div>
+          // 		</li>
+          // 		<li class='arrow-box__item'>
+          // 			<div style="background:${options.w.globals.colors[1]}; width:10px; height:10px; border-radius:10px"></div>
+          // 			<div>area: </div>
+          // 			<div>${areaValueList[index]}</div>
+          // 		</li>
+          // 		<li class='arrow-box__item'>
+
+          // 			<div>지역: </div>
+          // 			<div>${idList[index]}</div>
+          // 		</li>
+          // 	</ul>
+          // `;
+          //   },
+          // },
         }}
       />
     </Container>
@@ -76,10 +98,10 @@ function createCustomTooltip({
   idList,
 }: {
   opt: any;
-  timeList: string[];
-  barValueList: number[];
-  areaValueList: number[];
-  idList: string[];
+  timeList: any;
+  barValueList: any;
+  areaValueList: any;
+  idList: any;
 }) {
   const index = opt.dataPointIndex;
   return `

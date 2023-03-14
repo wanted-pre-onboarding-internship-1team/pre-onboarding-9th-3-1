@@ -53,14 +53,15 @@ export default function Chart() {
           },
           colors: ['#99C2A2', '#66C7F4'],
           tooltip: {
-            custom: (opt: any) =>
-              createCustomTooltip({
+            custom: (opt: any) => {
+              return createCustomTooltip({
                 opt,
                 timeList,
                 barValueList,
                 areaValueList,
                 idList,
-              }),
+              });
+            },
           },
         }}
       />

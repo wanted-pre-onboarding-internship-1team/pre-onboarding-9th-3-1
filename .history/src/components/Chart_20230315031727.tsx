@@ -3,7 +3,7 @@ import ApexCharts from 'react-apexcharts';
 import styled from 'styled-components';
 
 export default function Chart() {
-  const { timeList, idList, barValueList, areaValueList } = useMockList();
+  const test = useMockList();
   return (
     <Container>
       <ApexCharts
@@ -12,12 +12,12 @@ export default function Chart() {
           {
             name: 'bar',
             type: 'column',
-            data: barValueList,
+            data: test.barValueList,
           },
           {
             name: 'area',
             type: 'area',
-            data: areaValueList,
+            data: test.areaValueList,
           },
         ]}
         options={{
@@ -49,18 +49,35 @@ export default function Chart() {
             },
           ],
           xaxis: {
-            categories: timeList,
+            categories: test.timeList,
           },
           colors: ['#99C2A2', '#66C7F4'],
           tooltip: {
-            custom: (opt: any) =>
-              createCustomTooltip({
-                opt,
-                timeList,
-                barValueList,
-                areaValueList,
-                idList,
-              }),
+            custom: function (options) {
+              const index = options.dataPointIndex;
+              return `
+						<ul class='arrow-box'>
+							<li class='arrow-box__item'>
+								${test.timeList[index]}
+							</li>
+							<li class='arrow-box__item'>
+								<div style="background:${options.w.globals.colors[0]}; width:10px; height:10px; border-radius:10px"></div>
+								<div>bar: </div>
+								<div>${test.barValueList[index]}</div>
+							</li>
+							<li class='arrow-box__item'>
+								<div style="background:${options.w.globals.colors[1]}; width:10px; height:10px; border-radius:10px"></div>
+								<div>area: </div>
+								<div>${test.areaValueList[index]}</div>
+							</li>
+							<li class='arrow-box__item'>
+								
+								<div>지역: </div>
+								<div>${test.idList[index]}</div>
+							</li>
+						</ul>
+					`;
+            },
           },
         }}
       />
@@ -68,39 +85,32 @@ export default function Chart() {
   );
 }
 
-function createCustomTooltip({
-  opt,
-  timeList,
-  barValueList,
-  areaValueList,
-  idList,
-}: {
-  opt: any;
-  timeList: string[];
-  barValueList: number[];
-  areaValueList: number[];
-  idList: string[];
-}) {
-  const index = opt.dataPointIndex;
+function createCustomTooltip(
+  opt: any,
+  timeList: any,
+  barValueList: any,
+  idList: any
+) {
+  const index = options.dataPointIndex;
   return `
 						<ul class='arrow-box'>
 							<li class='arrow-box__item'>
-								${timeList[index]}
+								${test.timeList[index]}
 							</li>
 							<li class='arrow-box__item'>
-								<div style="background:${opt.w.globals.colors[0]}; width:10px; height:10px; border-radius:10px"></div>
+								<div style="background:${options.w.globals.colors[0]}; width:10px; height:10px; border-radius:10px"></div>
 								<div>bar: </div>
-								<div>${barValueList[index]}</div>
+								<div>${test.barValueList[index]}</div>
 							</li>
 							<li class='arrow-box__item'>
-								<div style="background:${opt.w.globals.colors[1]}; width:10px; height:10px; border-radius:10px"></div>
+								<div style="background:${options.w.globals.colors[1]}; width:10px; height:10px; border-radius:10px"></div>
 								<div>area: </div>
-								<div>${areaValueList[index]}</div>
+								<div>${test.areaValueList[index]}</div>
 							</li>
 							<li class='arrow-box__item'>
 								
 								<div>지역: </div>
-								<div>${idList[index]}</div>
+								<div>${test.idList[index]}</div>
 							</li>
 						</ul>
 					`;
