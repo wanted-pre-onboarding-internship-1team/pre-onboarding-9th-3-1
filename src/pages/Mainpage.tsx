@@ -1,5 +1,6 @@
+import Charts from '../components/Charts';
 import React from 'react';
 
 export default function Mainpage() {
-  return <div>Mainpage</div>;
+  return <Charts />;
 }

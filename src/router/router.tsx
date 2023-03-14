@@ -1,4 +1,3 @@
-import React from 'react';
 import Mainpage from '../pages/Mainpage';
 import { Route, Routes } from 'react-router-dom';
 
