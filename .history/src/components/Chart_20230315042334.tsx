@@ -70,7 +70,21 @@ export default function Chart() {
   };
   return (
     <Container>
-      <ApexCharts options={chartOptions} series={series} />
+      <ApexCharts
+        options={chartOptions}
+        series={[
+          {
+            name: 'bar',
+            type: 'column',
+            data: barValueList,
+          },
+          {
+            name: 'area',
+            type: 'area',
+            data: areaValueList,
+          },
+        ]}
+      />
     </Container>
   );
 }

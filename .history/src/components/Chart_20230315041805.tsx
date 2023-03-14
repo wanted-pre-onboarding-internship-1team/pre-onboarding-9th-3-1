@@ -5,72 +5,74 @@ import styled from 'styled-components';
 
 export default function Chart() {
   const { timeList, idList, barValueList, areaValueList } = useMockList();
-  const series = [
-    {
-      name: 'bar',
-      type: 'column',
-      data: barValueList,
-    },
-    {
-      name: 'area',
-      type: 'area',
-      data: areaValueList,
-    },
-  ];
   const chartOptions: ApexOptions = {
     chart: {
       height: '600',
     },
-
-    yaxis: [
+		series: [
       {
-        seriesName: 'bar',
-        axisTicks: {
-          show: true,
-        },
-        axisBorder: {
-          show: true,
-        },
-        title: {
-          text: 'bar',
-        },
+        name: 'bar',
+        type: 'column',
+        data: barValueList,
       },
       {
-        opposite: true,
-        seriesName: 'area',
-        axisTicks: {
-          show: true,
-        },
-        axisBorder: {
-          show: true,
-        },
-        title: {
-          text: 'area',
-        },
+        name: 'area',
+        type: 'area',
+        data: areaValueList,
       },
     ],
-    xaxis: {
-      categories: timeList,
-      tickAmount: 6,
-      labels: {
-        rotate: 0,
+ 
+      yaxis: [
+        {
+          seriesName: 'bar',
+          axisTicks: {
+            show: true,
+          },
+          axisBorder: {
+            show: true,
+          },
+          title: {
+            text: 'bar',
+          },
+        },
+        {
+          opposite: true,
+          seriesName: 'area',
+          axisTicks: {
+            show: true,
+          },
+          axisBorder: {
+            show: true,
+          },
+          title: {
+            text: 'area',
+          },
+        },
+      ],
+
+      xaxis: {
+        categories: timeList,
+        tickAmount: 6,
+        labels: {
+          rotate: 0,
+        },
       },
-    },
-    colors: ['#99C2A2', '#66C7F4'],
-    tooltip: {
-      custom: (opt: any) =>
-        createCustomTooltip({
-          opt,
-          timeList,
-          barValueList,
-          areaValueList,
-          idList,
-        }),
+      colors: ['#99C2A2', '#66C7F4'],
+      tooltip: {
+        custom: (opt: any) =>
+          createCustomTooltip({
+            opt,
+            timeList,
+            barValueList,
+            areaValueList,
+            idList,
+          }),
+      },
     },
   };
   return (
     <Container>
-      <ApexCharts options={chartOptions} series={series} />
+      <ApexCharts />
     </Container>
   );
 }

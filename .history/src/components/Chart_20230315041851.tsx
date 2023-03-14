@@ -5,23 +5,22 @@ import styled from 'styled-components';
 
 export default function Chart() {
   const { timeList, idList, barValueList, areaValueList } = useMockList();
-  const series = [
-    {
-      name: 'bar',
-      type: 'column',
-      data: barValueList,
-    },
-    {
-      name: 'area',
-      type: 'area',
-      data: areaValueList,
-    },
-  ];
   const chartOptions: ApexOptions = {
     chart: {
       height: '600',
     },
-
+    series: [
+      {
+        name: 'bar',
+        type: 'column',
+        data: barValueList,
+      },
+      {
+        name: 'area',
+        type: 'area',
+        data: areaValueList,
+      },
+    ],
     yaxis: [
       {
         seriesName: 'bar',
@@ -70,7 +69,7 @@ export default function Chart() {
   };
   return (
     <Container>
-      <ApexCharts options={chartOptions} series={series} />
+      <ApexCharts {...chartOptions} />
     </Container>
   );
 }
