@@ -5,6 +5,11 @@ import styled from 'styled-components';
 export default function Chart() {
   const { timeList, idList, barValueList, areaValueList } = useMockList();
 
+  const test = (event: any, chartContext: any, config: any) => {
+    console.log(event);
+    console.log(chartContext);
+    console.log(config);
+  };
   return (
     <Container>
       <ApexCharts
@@ -49,7 +54,11 @@ export default function Chart() {
               },
             },
           ],
-
+          chart: {
+            events: {
+              click: test,
+            },
+          },
           xaxis: {
             categories: timeList,
           },
@@ -66,6 +75,7 @@ export default function Chart() {
           },
         }}
       />
+      <button onClick={test}>test</button>
     </Container>
   );
 }

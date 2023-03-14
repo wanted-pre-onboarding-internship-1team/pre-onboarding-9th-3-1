@@ -49,7 +49,11 @@ export default function Chart() {
               },
             },
           ],
-
+          chart: {
+            events: {
+              click: test,
+            },
+          },
           xaxis: {
             categories: timeList,
           },

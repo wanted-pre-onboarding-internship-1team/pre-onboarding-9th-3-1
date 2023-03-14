@@ -5,6 +5,9 @@ import styled from 'styled-components';
 export default function Chart() {
   const { timeList, idList, barValueList, areaValueList } = useMockList();
 
+  const test = (data: any) => {
+    console.log(data);
+  };
   return (
     <Container>
       <ApexCharts
@@ -49,7 +52,6 @@ export default function Chart() {
               },
             },
           ],
-
           xaxis: {
             categories: timeList,
           },
