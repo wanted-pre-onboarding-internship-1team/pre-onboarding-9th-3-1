@@ -43,6 +43,19 @@ export default function Chart() {
         options={{
           chart: { id: 'test' },
           xaxis: { categories: Object.keys(data) },
+          yaxis: [
+            {
+              title: {
+                text: 'area',
+              },
+            },
+            {
+              opposite: true,
+              title: {
+                text: 'bar',
+              },
+            },
+          ],
           tooltip: {
             x: {
               show: true,
@@ -52,10 +65,10 @@ export default function Chart() {
                 w.globals.initialSeries[seriesIndex].data[dataPointIndex];
 
               return `
-              id : ${data.id}<br/>
-              value_area : ${data.area}<br/>
-              value_bar : ${data.bar}<br/>
-              `;
+      id : ${data.id}<br />
+      value_area : ${data.area}<br />
+      value_bar : ${data.bar}<br />
+      `;
             },
           },
         }}
