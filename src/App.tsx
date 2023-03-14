@@ -1,3 +1,4 @@
+import { DataProvider } from './contexts/DataContext';
 import Router from './router/router';
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
@@ -12,10 +13,10 @@ const GlobalStyle = createGlobalStyle`
 
 function App() {
   return (
-    <>
+    <DataProvider>
       <GlobalStyle />
       <Router />
-    </>
+    </DataProvider>
   );
 }
 
