@@ -11,6 +11,6 @@ export const createValueData = (
   return values;
 };
 
-export const calcPositionRatio = (idx: number, splitAmount: number) => {
-  return `${(idx / splitAmount) * 100}%`;
+export const calcPositionRatio = (amount: number, totalAmount: number) => {
+  return `${(amount / totalAmount) * 100}%`;
 };
