@@ -1,9 +1,7 @@
-import axios from 'axios';
 import React from 'react';
 import ApexCharts from 'react-apexcharts';
 
 export default function Mainpage() {
-  axios.get('/data/mock.json').then(data => console.log(data));
   return (
     <div>
       <ApexCharts
@@ -24,11 +22,12 @@ export default function Mainpage() {
           grid: { show: false },
           stroke: {
             curve: 'smooth',
-            width: 2,
+            width: 10,
           },
           yaxis: {
             show: false,
           },
+
           colors: ['red'],
         }}
       />

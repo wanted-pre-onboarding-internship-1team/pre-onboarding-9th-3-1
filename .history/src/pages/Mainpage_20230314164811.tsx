@@ -1,9 +1,7 @@
-import axios from 'axios';
 import React from 'react';
 import ApexCharts from 'react-apexcharts';
 
 export default function Mainpage() {
-  axios.get('/data/mock.json').then(data => console.log(data));
   return (
     <div>
       <ApexCharts

@@ -3,7 +3,7 @@ import React from 'react';
 import ApexCharts from 'react-apexcharts';
 
 export default function Mainpage() {
-  axios.get('/data/mock.json').then(data => console.log(data));
+  axios.get('/data/mock.json').then(data=>console.log(data))l
   return (
     <div>
       <ApexCharts
