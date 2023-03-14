@@ -1,4 +1,6 @@
+import { SPLIT_AMOUNT } from '../../const/value';
 import { ChartData } from '../../interface/Data';
+import { createValueData, calcBottom } from '../../utils/value';
 import styled from 'styled-components';
 
 export default function Area({ dataList }: { dataList: ChartData[] }) {
@@ -9,18 +11,14 @@ export default function Area({ dataList }: { dataList: ChartData[] }) {
     return Math.max(prev, curr.data.value_area);
   }, 0);
 
-  const areaValues = [];
-  const areaGap = (maxArea - minArea) / 9;
-  for (let i = 0; i <= 9; i++) {
-    areaValues.push(Math.round(minArea + i * areaGap));
-  }
+  const areaValues = createValueData(minArea, maxArea, SPLIT_AMOUNT);
 
   return (
     <ValueArea>
-      {areaValues.map(value => {
+      {areaValues.map((value, idx) => {
         return (
           <AreaText
-            style={{ bottom: `${(value / maxArea) * 100}%` }}
+            style={{ bottom: calcBottom(idx, SPLIT_AMOUNT) }}
             key={value}>
             {value}
           </AreaText>

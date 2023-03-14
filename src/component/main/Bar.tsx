@@ -1,4 +1,6 @@
+import { SPLIT_AMOUNT } from '../../const/value';
 import { ChartData } from '../../interface/Data';
+import { calcBottom, createValueData } from '../../utils/value';
 import styled from 'styled-components';
 
 export default function Bar({ dataList }: { dataList: ChartData[] }) {
@@ -8,10 +10,19 @@ export default function Bar({ dataList }: { dataList: ChartData[] }) {
   const maxBar = dataList.reduce((prev, curr) => {
     return Math.max(prev, curr.data.value_bar);
   }, 0);
+
+  const barValues = createValueData(minBar, maxBar, SPLIT_AMOUNT);
   return (
     <ValueBar>
-      <MaxBar>max : {maxBar}</MaxBar>
-      <MinBar>min : {minBar}</MinBar>
+      {barValues.map((value, idx) => {
+        return (
+          <BarText
+            style={{ bottom: calcBottom(idx, SPLIT_AMOUNT) }}
+            key={value}>
+            {value}
+          </BarText>
+        );
+      })}
     </ValueBar>
   );
 }
@@ -22,11 +33,8 @@ const ValueBar = styled.div`
   background-color: red;
   width: 200px;
 `;
-const MaxBar = styled.span`
+
+const BarText = styled.span`
   position: absolute;
-  top: 0;
-`;
-const MinBar = styled.span`
-  position: absolute;
-  bottom: 0;
+  left: 0;
 `;
