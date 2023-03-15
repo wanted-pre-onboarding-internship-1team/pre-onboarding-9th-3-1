@@ -3,8 +3,6 @@ import {
   Chart as ChartJS,
   LinearScale,
   CategoryScale,
-  TimeScale,
-  TimeSeriesScale,
   BarElement,
   PointElement,
   LineElement,
@@ -13,6 +11,7 @@ import {
   BarController,
   Filler,
   Title,
+  Tooltip,
 } from 'chart.js';
 import React from 'react';
 import { Chart } from 'react-chartjs-2';
@@ -23,13 +22,12 @@ ChartJS.register(
   BarElement,
   PointElement,
   LineElement,
-  Legend,
   LineController,
   BarController,
+  Legend,
   Filler,
   Title,
-  TimeScale,
-  TimeSeriesScale
+  Tooltip
 );
 
 export default function Charts() {
@@ -42,21 +40,26 @@ export default function Charts() {
       {
         type: 'line' as const,
         label: 'Area',
-        borderColor: 'rgba(72, 102, 82)',
-        borderWidth: 2,
+        borderColor: 'rgb(7, 101, 171)',
+        borderWidth: 4,
+        pointRadius: 0,
+        pointHoverBackgroundColor: 'rgb(241, 177, 58)',
         fill: {
           target: 'start',
-          above: 'rgba(72, 102, 82, 0.5)',
+          above: 'rgba(7, 101, 171,0.5)',
         },
         yAxisID: 'yArea',
         data: Object.values(dataValues).map(houlyData => houlyData.value_area),
+        order: 1,
       },
       {
         type: 'bar' as const,
         label: 'Bar',
-        backgroundColor: '#fbb05c',
+        backgroundColor: 'rgb(241, 177, 58)',
+        hoverBackgroundColor: 'rgba(247, 207, 165)',
         yAxisID: 'yBar',
         data: Object.values(dataValues).map(houlyData => houlyData.value_bar),
+        order: 2,
       },
     ],
   };
@@ -79,8 +82,23 @@ export default function Charts() {
           top: 10,
           bottom: 10,
         },
-        aling: 'center',
+        aline: 'center',
         font: { weight: 'bold', size: 40 },
+        color: 'rgb(7, 101, 171)',
+      },
+      tooltip: {
+        callbacks: {
+          beforeBody: (tooltipItem: any) => {
+            const beforeBody = Object.values(dataValues).map(
+              houlyData => houlyData.id
+            )[tooltipItem[0].dataIndex];
+            return beforeBody;
+          },
+          bodySpacing: 10,
+        },
+        bodySpacing: 10,
+        titleFont: { size: 15 },
+        bodyFont: { weight: 'bold', size: 15 },
       },
     },
     interaction: {
@@ -105,7 +123,10 @@ export default function Charts() {
           font: {
             size: 15,
           },
+          stepSize: 40,
         },
+        suggestedMax: 200,
+        suggestedMin: 0,
         title: {
           display: true,
           text: 'Area',
@@ -123,7 +144,11 @@ export default function Charts() {
           font: {
             size: 15,
           },
+          stepSize: 4000,
         },
+        suggestedMin: 10000,
+        suggestedMax: 20000,
+
         title: {
           display: true,
           text: 'Bar',
@@ -146,10 +171,12 @@ export default function Charts() {
           maxRotation: 0,
         },
         grid: {
-          display: false,
+          tickMarkLength: 40,
+          offsetGridLines: true,
+          display: true,
+          drawTicks: false,
+          drawOnChartArea: false,
         },
-        labelOffset: 10,
-        mirror: true,
       },
     },
   };
