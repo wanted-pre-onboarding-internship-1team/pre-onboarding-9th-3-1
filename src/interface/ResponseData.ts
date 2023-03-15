@@ -1,5 +1,3 @@
-import { ID } from './Data';
-
 export interface DataResponse {
   response: { [key: string]: Data };
 }

@@ -1,4 +1,4 @@
-import { Data, DataValue } from './ResponseData';
+import { DataValue } from './ResponseData';
 
 export interface ChartData {
   timestamp: string;
