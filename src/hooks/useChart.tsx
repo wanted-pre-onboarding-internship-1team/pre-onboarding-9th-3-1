@@ -1,28 +1,31 @@
 import { API, ChartMap } from '../interfaces/API';
 import { ChartData } from '../interfaces/ChartData';
-import { useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 
-type UseChartProps = {
-  getChartData: (s: string) => ChartData;
-  getKeys: () => string[];
-};
+export type UseChartProps = [
+  ChartMap,
+  {
+    getChartData: (s: string) => ChartData;
+    getKeys: () => string[];
+  }
+];
 
 const useChart = (api: API): UseChartProps => {
-  const dataSet = useRef<ChartMap>({});
+  const [data, setData] = useState<ChartMap>({});
 
   useEffect(() => {
-    api.fetchData().then(res => (dataSet.current = res.response));
-  }, [api]);
+    api.fetchData().then(res => setData(res.response));
+  }, []);
 
   const getChartData = (timeStamp: string): ChartData => {
-    return dataSet.current[timeStamp];
+    return data[timeStamp];
   };
 
   const getKeys = () => {
-    return Object.keys(dataSet.current);
+    return Object.keys(data);
   };
 
-  return { getChartData, getKeys };
+  return [data, { getChartData, getKeys }];
 };
 
 export default useChart;

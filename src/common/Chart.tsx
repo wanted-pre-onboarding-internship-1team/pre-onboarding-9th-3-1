@@ -1,40 +1,35 @@
+import { useChartContext } from '../contexts/ChartContext';
 import {
+  Filler,
   Chart as ChartJS,
-  CategoryScale,
   LinearScale,
+  CategoryScale,
   BarElement,
-  Title,
-  Tooltip,
+  PointElement,
+  LineElement,
   Legend,
+  Tooltip,
+  LineController,
+  BarController,
 } from 'chart.js';
-import { Bar } from 'react-chartjs-2';
+import { useEffect, useState } from 'react';
+import { Chart } from 'react-chartjs-2';
 
 ChartJS.register(
-  CategoryScale,
+  Filler,
   LinearScale,
+  CategoryScale,
   BarElement,
-  Title,
+  PointElement,
+  LineElement,
+  Legend,
   Tooltip,
-  Legend
+  LineController,
+  BarController
 );
 
-export const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: 'top' as const,
-    },
-    title: {
-      display: true,
-      text: 'Chart.js Bar Chart',
-    },
-  },
-};
-
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-
-export const data = {
-  labels,
+const defaultData = {
+  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
   datasets: [
     {
       label: 'Dataset 1',
@@ -49,6 +44,59 @@ export const data = {
   ],
 };
 
-export function Chart() {
-  return <Bar options={options} data={data} />;
-}
+const ChartView = () => {
+  const [chartdata, setChartData] = useState(defaultData);
+  const { data, getChartData, getKeys } = useChartContext();
+
+  const processData = () => {
+    const timeStamps = getKeys();
+
+    const newData = {
+      labels: timeStamps,
+      datasets: [
+        {
+          type: 'line' as const,
+          borderColor: 'rgb(255, 99, 132)',
+          borderWidth: 2,
+          fill: true,
+          label: 'area data',
+          data: timeStamps.map(a => getChartData(a).value_area * 100),
+          backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        },
+        {
+          type: 'bar' as const,
+          label: 'value bar',
+          data: timeStamps.map(a => getChartData(a).value_bar),
+          backgroundColor: 'rgba(53, 162, 235, 0.5)',
+        },
+      ],
+    };
+    return newData;
+  };
+
+  useEffect(() => {
+    const newData = processData();
+    setChartData(newData);
+  }, [data]);
+
+  const opt = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'bottom' as const,
+      },
+      title: {
+        display: true,
+        text: 'hello world',
+        padding: {
+          top: 10,
+          bottom: 30,
+        },
+      },
+    },
+  };
+
+  return <Chart type='bar' options={opt} data={chartdata} />;
+};
+
+export { ChartView };
