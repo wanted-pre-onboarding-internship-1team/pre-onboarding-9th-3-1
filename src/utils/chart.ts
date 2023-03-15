@@ -18,7 +18,7 @@ const createAreaData = (dataList: ChartData[]) => {
     type: 'line' as const,
     fill: true,
     label: 'Area',
-    data: dataList.map(data => data.data.value_area * AREA_NORMALIZE_VALUE),
+    data: dataList.map(data => data.value_area * AREA_NORMALIZE_VALUE),
     borderColor: 'rgb(53, 162, 235)',
     backgroundColor: 'rgba(53, 162, 235, 0.5)',
   };
@@ -27,7 +27,7 @@ const createBarData = (dataList: ChartData[]) => {
   return {
     type: 'bar' as const,
     label: 'Bar',
-    data: dataList.map(data => data.data.value_bar),
+    data: dataList.map(data => data.value_bar),
     borderColor: 'rgb(53, 162, 235)',
     backgroundColor: 'rgb(75, 192, 192)',
   };

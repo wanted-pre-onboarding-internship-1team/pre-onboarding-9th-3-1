@@ -1,4 +1,4 @@
-import { chartOption } from '../../const/chart';
+import { createChartOption } from '../../const/chart';
 import useDataList from '../../hooks/useDataList';
 import { createData } from '../../utils/chart';
 import {
@@ -35,5 +35,5 @@ export default function MultiChart() {
 
   const data = createData(dataList);
 
-  return <Chart type='bar' options={chartOption} data={data} />;
+  return <Chart type='bar' options={createChartOption(dataList)} data={data} />;
 }
