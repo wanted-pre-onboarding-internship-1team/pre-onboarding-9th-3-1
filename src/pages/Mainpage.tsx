@@ -6,7 +6,6 @@ export default function Mainpage() {
     <WrapperDiv>
       <ContentDiv>
         <MultiChart />
-        {/* <SampleGraph /> */}
       </ContentDiv>
     </WrapperDiv>
   );
