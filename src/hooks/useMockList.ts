@@ -12,15 +12,15 @@ export default function useMockList() {
     : [];
 
   const idList = originData
-    ? Object.entries(originData).map(entry => entry[1].id)
+    ? Object.values(originData).map(entry => entry.id)
     : [];
 
   const barValueList = originData
-    ? Object.entries(originData).map(entry => entry[1].value_bar)
+    ? Object.values(originData).map(entry => entry.value_bar)
     : [];
 
   const areaValueList = originData
-    ? Object.entries(originData).map(entry => entry[1].value_area)
+    ? Object.values(originData).map(entry => entry.value_area)
     : [];
 
   useEffect(() => {
