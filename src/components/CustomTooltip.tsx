@@ -24,8 +24,8 @@ export default function CustomTooltip({
 const Tooltip = styled.div`
   .custom-tooltip {
     background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 50%;
-    padding: 50px 20px;
+    border-radius: 5px;
+    padding: 20px 20px;
     display: flex;
     flex-direction: column;
 		align-items: center;
