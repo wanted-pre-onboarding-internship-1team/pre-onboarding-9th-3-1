@@ -7,18 +7,18 @@ import {
   SetStateAction,
 } from 'react';
 
-export const DataValueContext = createContext<Data[] | undefined>(undefined);
+export const DataValueContext = createContext<Data>({});
 export const DataSetContext = createContext<
-  Dispatch<SetStateAction<Data[] | undefined>>
+  Dispatch<SetStateAction<Data | null | undefined>>
 >(() => {
   return;
 });
 
 const DataProvider = ({ children }: { children: ReactNode }) => {
-  const [data, setData] = useState<Data[] | undefined>(undefined);
+  const [data, setData] = useState<Data | null>();
 
   return (
-    <DataValueContext.Provider value={data}>
+    <DataValueContext.Provider value={data || {}}>
       <DataSetContext.Provider value={setData}>
         {children}
       </DataSetContext.Provider>

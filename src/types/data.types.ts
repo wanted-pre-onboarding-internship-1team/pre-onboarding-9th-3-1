@@ -1,10 +1,8 @@
-export interface DataResponse {
-  type: string;
-  version: number;
-  response: Data[];
+export interface Data {
+  [key: string]: DataItem;
 }
 
-export interface Data {
+export interface DataItem {
   id: string;
   value_area: number;
   value_bar: number;

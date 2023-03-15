@@ -7,12 +7,12 @@ const useChartData = () => {
   const getData = useGetData();
 
   useEffect(() => {
-    !data && getData();
-  }, [data, getData]);
+    getData();
+  }, [getData]);
 
-  const categories = Object.keys(data || {});
-  const barData = Object.values(data || {}).map(data => data.value_bar);
-  const AreaData = Object.values(data || {}).map(data => data.value_area);
+  const categories = Object.keys(data);
+  const barData = Object.values(data).map(data => data.value_bar);
+  const AreaData = Object.values(data).map(data => data.value_area);
 
   return { categories, barData, AreaData };
 };
