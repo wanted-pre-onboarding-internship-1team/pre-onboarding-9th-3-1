@@ -24,9 +24,6 @@ const ChartItem = () => {
       height: 350,
       stacked: false,
     },
-    dataLabels: {
-      enabled: false,
-    },
     stroke: {
       width: [0, 2],
       curve: 'smooth',
@@ -34,6 +31,9 @@ const ChartItem = () => {
     xaxis: {
       type: 'datetime',
       categories,
+      tooltip: {
+        enabled: false,
+      },
     },
     yaxis: [
       {
@@ -110,10 +110,6 @@ const ChartItem = () => {
     },
     markers: {
       size: 0,
-    },
-    legend: {
-      horizontalAlign: 'left',
-      offsetX: 40,
     },
   };
 
