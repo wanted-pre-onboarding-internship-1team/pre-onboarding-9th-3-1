@@ -18,10 +18,6 @@ export default function Chart() {
     },
   ];
   const chartOptions: ApexOptions = {
-    chart: {
-      height: '600',
-    },
-
     yaxis: [
       {
         seriesName: 'bar',
@@ -70,7 +66,7 @@ export default function Chart() {
   };
   return (
     <Container>
-      <ApexCharts options={chartOptions} series={series} />
+      <ApexCharts options={chartOptions} series={series} height={600} />
     </Container>
   );
 }
@@ -114,12 +110,8 @@ function createCustomTooltip({
 }
 
 const Container = styled.div`
-  position: absolute;
   width: 100%;
   max-width: 1200px;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
 
   .arrow-box {
   }
