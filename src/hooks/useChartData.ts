@@ -11,10 +11,11 @@ const useChartData = () => {
   }, [getData]);
 
   const categories = Object.keys(data);
+  const id = Object.values(data).map(data => data.id);
   const barData = Object.values(data).map(data => data.value_bar);
-  const AreaData = Object.values(data).map(data => data.value_area);
+  const areaData = Object.values(data).map(data => data.value_area);
 
-  return { categories, barData, AreaData };
+  return { categories, id, barData, areaData };
 };
 
 export default useChartData;

@@ -1,9 +1,10 @@
+import createToolTip from '../utils/createToolTip';
 import useChartData from './../hooks/useChartData';
 import { ApexOptions } from 'apexcharts';
 import Chart from 'react-apexcharts';
 
 const ChartItem = () => {
-  const { categories, barData, AreaData } = useChartData();
+  const { categories, id, barData, areaData } = useChartData();
 
   const series = [
     {
@@ -14,7 +15,7 @@ const ChartItem = () => {
     {
       name: 'Area',
       type: 'area',
-      data: AreaData,
+      data: areaData,
     },
   ];
 
@@ -96,19 +97,15 @@ const ChartItem = () => {
       },
     },
     tooltip: {
-      enabled: false,
       shared: true,
-      intersect: false,
-      x: {
-        format: 'yyyy-MM-dd HH:mm',
+      custom: options => {
+        return createToolTip({ options, id });
       },
-      y: {
-        formatter: y => {
-          if (typeof y !== 'undefined') {
-            return y.toLocaleString();
-          }
-          return y;
-        },
+      fixed: {
+        enabled: true,
+        position: 'bottomLeft',
+        offsetX: 120,
+        offsetY: -60,
       },
     },
     markers: {
