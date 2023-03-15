@@ -1,14 +1,11 @@
-import Chart from '../component/main/Chart';
-import Chart2 from '../component/main/Chart2';
-import SampleGraph from '../component/main/SampleGraph';
-import useDataList from '../hooks/useDataList';
+import MultiChart from '../component/main/MultiChart';
 import styled from 'styled-components';
 
 export default function Mainpage() {
   return (
     <WrapperDiv>
       <ContentDiv>
-        <Chart2 />
+        <MultiChart />
         {/* <SampleGraph /> */}
       </ContentDiv>
     </WrapperDiv>
