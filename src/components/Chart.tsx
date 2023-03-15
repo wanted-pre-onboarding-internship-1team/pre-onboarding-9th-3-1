@@ -7,30 +7,29 @@ export default function Chart() {
   const { timeList, idList, barValueList, areaValueList } = useMockList();
   const series = [
     {
-      name: 'bar',
-      type: 'column',
-      data: barValueList,
-    },
-    {
       name: 'area',
       type: 'area',
       data: areaValueList,
     },
+    {
+      name: 'bar',
+      type: 'column',
+      data: barValueList,
+    },
   ];
   const chartOptions: ApexOptions = {
-    yaxis: [
-      {
-        seriesName: 'bar',
-        axisTicks: {
-          show: true,
-        },
-        axisBorder: {
-          show: true,
-        },
-        title: {
-          text: 'bar',
-        },
+    fill: {
+      type: 'gradient',
+      gradient: {
+        shade: 'light',
+        type: 'vertical',
+        shadeIntensity: 1,
+        opacityFrom: 0.1,
+        opacityTo: 1,
+        stops: [0, 100],
       },
+    },
+    yaxis: [
       {
         opposite: true,
         seriesName: 'area',
@@ -44,6 +43,18 @@ export default function Chart() {
           text: 'area',
         },
       },
+      {
+        seriesName: 'bar',
+        axisTicks: {
+          show: true,
+        },
+        axisBorder: {
+          show: true,
+        },
+        title: {
+          text: 'bar',
+        },
+      },
     ],
     xaxis: {
       categories: timeList,
@@ -52,7 +63,7 @@ export default function Chart() {
         rotate: 0,
       },
     },
-    colors: ['#99C2A2', '#66C7F4'],
+    colors: ['#66C7F4', '#99C2A2'],
     tooltip: {
       custom: (opt: any) =>
         createCustomTooltip({
