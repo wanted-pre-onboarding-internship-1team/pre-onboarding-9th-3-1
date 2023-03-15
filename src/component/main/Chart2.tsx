@@ -1,6 +1,6 @@
 import useDataList from '../../hooks/useDataList';
 import Area from './Area';
-import Bar from './Bar';
+// import Bar from './Bar';
 import ChartExample from './ChartExample';
 import Data from './Data';
 import {
@@ -15,7 +15,7 @@ import {
   Legend,
   BarElement,
 } from 'chart.js';
-import { Chart, Line } from 'react-chartjs-2';
+import { Chart, Line, Bar } from 'react-chartjs-2';
 import styled from 'styled-components';
 
 ChartJS.register(
@@ -36,13 +36,6 @@ export default function Chart2() {
     return <div>로딩중</div>;
   }
 
-  //   const maxBar = dataList.reduce((prev, curr) => {
-  //     return Math.max(prev, curr.data.value_bar);
-  //   }, 0);
-  //   const maxArea = dataList.reduce((prev, curr) => {
-  //     return Math.max(prev, curr.data.value_area);
-  //   }, 0);
-  //   return <ChartExample />;
   const options = {
     responsive: true,
     plugins: {
@@ -53,39 +46,43 @@ export default function Chart2() {
         display: true,
         text: 'Flexsys',
       },
+      tooltip: {
+        callbacks: {
+          title: (xDatapoint: any) => {
+            return xDatapoint.raw;
+          },
+          label: (yDatapoint: any) => {
+            if (yDatapoint.dataset.label === 'Area') {
+              return yDatapoint.raw / 100;
+            }
+            return yDatapoint.raw;
+          },
+        },
+      },
     },
   };
+
   const labels = dataList.map(data => data.timestamp);
   const data = {
     labels,
     datasets: [
       {
-        type: 'bar' as const,
-        label: 'Bar',
-        data: dataList.map(data => data.data.value_bar),
+        type: 'line' as const,
+        fill: true,
+        label: 'Area',
+        data: dataList.map(data => data.data.value_area * 100),
         borderColor: 'rgb(53, 162, 235)',
         backgroundColor: 'rgba(53, 162, 235, 0.5)',
       },
       {
-        type: 'line' as const,
-        fill: true,
-        label: 'Area',
-        data: dataList.map(data => data.data.value_area),
+        type: 'bar' as const,
+        label: 'Bar',
+        data: dataList.map(data => data.data.value_bar),
         borderColor: 'rgb(53, 162, 235)',
-        backgroundColor: 'rgba(53, 162, 235, 0.5)',
+        backgroundColor: 'rgb(75, 192, 192)',
       },
     ],
   };
+
   return <Chart type='bar' options={options} data={data} />;
 }
-
-// const ChartWrapper = styled.div`
-//   display: flex;
-// `;
-// const DataList = styled.ul`
-//   display: flex;
-//   width: 800px;
-//   height: 500px;
-//   border: solid black 1px;
-//   position: relative;
-// `;
