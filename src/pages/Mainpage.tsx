@@ -1,4 +1,5 @@
 import Chart from '../component/main/Chart';
+import ChartJS from '../component/main/ChartJS';
 import SampleGraph from '../component/main/SampleGraph';
 import useDataList from '../hooks/useDataList';
 import styled from 'styled-components';
@@ -7,7 +8,7 @@ export default function Mainpage() {
   return (
     <WrapperDiv>
       <ContentDiv>
-        <Chart />
+        <ChartJS />
         {/* <SampleGraph /> */}
       </ContentDiv>
     </WrapperDiv>
