@@ -1,11 +1,11 @@
 import { Chart } from '../common/Chart';
+import ChartProvider from '../contexts/ChartContext';
 
 const Mainpage = () => {
   return (
-    <div>
-      Mainpage
+    <ChartProvider>
       <Chart />
-    </div>
+    </ChartProvider>
   );
 };
 

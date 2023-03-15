@@ -2,8 +2,17 @@ import { API, ChartMap } from '../interfaces/API';
 import { ChartData } from '../interfaces/ChartData';
 import { useEffect, useRef } from 'react';
 
-const useChart = (api: API) => {
+type UseChartProps = {
+  getChartData: (s: string) => ChartData;
+  getKeys: () => string[];
+};
+
+const useChart = (api: API): UseChartProps => {
   const dataSet = useRef<ChartMap>({});
+
+  useEffect(() => {
+    api.fetchData().then(res => (dataSet.current = res.response));
+  }, [api]);
 
   const getChartData = (timeStamp: string): ChartData => {
     return dataSet.current[timeStamp];
@@ -13,11 +22,7 @@ const useChart = (api: API) => {
     return Object.keys(dataSet.current);
   };
 
-  useEffect(() => {
-    api.fetchData().then(res => (dataSet.current = res.response));
-  }, [api]);
-
-  return [dataSet, { getChartData, getKeys }];
+  return { getChartData, getKeys };
 };
 
 export default useChart;
