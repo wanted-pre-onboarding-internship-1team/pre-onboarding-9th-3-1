@@ -1,14 +1,20 @@
-import useMockList from '../hooks/useMockList';
+import useMockList from '../../hooks/useMockList';
+import Filter from '../filter/Filter';
 import { ApexOptions } from 'apexcharts';
 import React from 'react';
 import { useState } from 'react';
 import ApexCharts from 'react-apexcharts';
+import { BiFilterAlt } from 'react-icons/bi';
+import { useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 export default function Chart() {
   const { timeList, idList, barValueList, areaValueList } = useMockList();
   const [currentLocal, setCurrentLocal] = useState<string>('');
-  const [selectedFilter, setSelectedFilter] = useState<boolean>(false);
+  const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const queries = searchParams.getAll('local');
 
   const series = [
     {
@@ -117,23 +123,14 @@ export default function Chart() {
     },
   };
 
-  const handleFilterButton = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const { value } = e.currentTarget;
-    setCurrentLocal(value);
-  };
-
   return (
     <Container>
       <ApexCharts options={chartOptions} series={series} height={600} />
-      <ButtonContainer>
-        {[...new Set(idList)].map((local, idx) => {
-          return (
-            <FilterButton key={idx} value={local} onClick={handleFilterButton}>
-              {local}
-            </FilterButton>
-          );
-        })}
-      </ButtonContainer>
+      <BiFilterAlt
+        className='icon'
+        onClick={() => setIsFilterOpen(!isFilterOpen)}
+      />
+      <Filter isFilterOpen={isFilterOpen} setCurrentLocal={setCurrentLocal} />
     </Container>
   );
 }
@@ -200,15 +197,12 @@ const Container = styled.div`
     gap: 5px;
     align-items: center;
   }
-`;
 
-const ButtonContainer = styled.div`
-  position: absolute;
-  bottom: -10px;
-  left: 40px;
-`;
-
-const FilterButton = styled.button`
-  text-align: center;
-  margin: 5px;
+  .icon {
+    position: absolute;
+    top: -19px;
+    right: 140px;
+    cursor: pointer;
+    font-size: 23px;
+  }
 `;
