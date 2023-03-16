@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 export default function Chart() {
   const { timeList, idList, barValueList, areaValueList } = useMockList();
-  const [filter, addFilter] = useFilter();
+  const [filter, addFilter, deleteFilter] = useFilter();
 
   const series = [
     {
@@ -23,13 +23,19 @@ export default function Chart() {
   const chartOptions: ApexOptions = {
     chart: {
       events: {
-        dataPointSelection: (event, chartContext, config) => {
+        click: (event, chartContext, config) => {
           const index = config.dataPointIndex;
-          addFilter(idList[index]);
+          const id = idList[index];
+          if (filter.includes(id)) {
+            deleteFilter(id);
+          } else {
+            addFilter(id);
+          }
         },
       },
     },
     fill: {
+      opacity: [1, 0.5],
       type: 'solid',
       gradient: {
         shade: 'light',
@@ -81,22 +87,23 @@ export default function Chart() {
     },
     stroke: {
       width: [2, 1],
+      curve: 'smooth',
     },
     colors: [
       function (e: any) {
         const id = idList[e.dataPointIndex];
-        if (filter.includes(id) || filter.length === 0) {
-          return '#138db3';
+        if (filter.includes(id)) {
+          return '#de1313';
         } else {
-          return '#581919';
+          return '#2883e4';
         }
       },
       function (e: any) {
         const id = idList[e.dataPointIndex];
         if (filter.includes(id)) {
-          return '#581919';
+          return '#de1313';
         } else {
-          return '#138db3';
+          return '#2883e4';
         }
       },
     ],
