@@ -14,6 +14,7 @@ const Header = styled.header`
 `;
 
 const H1 = styled.h1`
+  line-height: 1.3em;
   font-size: 5rem;
   font-style: italic;
   color: #abfcc689;
@@ -29,4 +30,5 @@ const SubTitle = styled.span`
   left: 50%;
   transform: translate(-50%);
   color: #98989883;
+  white-space: nowrap;
 `;
