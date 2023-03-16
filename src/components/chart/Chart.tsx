@@ -1,20 +1,19 @@
 import useMockList from '../../hooks/useMockList';
+import useQuerystring from '../../hooks/useQuerystring';
 import Filter from '../filter/Filter';
 import { ApexOptions } from 'apexcharts';
 import React from 'react';
 import { useState } from 'react';
 import ApexCharts from 'react-apexcharts';
 import { BiFilterAlt } from 'react-icons/bi';
-import { useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 export default function Chart() {
   const { timeList, idList, barValueList, areaValueList } = useMockList();
   const [currentLocal, setCurrentLocal] = useState<string>('');
   const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
-  const [searchParams, setSearchParams] = useSearchParams();
 
-  const queries = searchParams.getAll('local');
+  const { queries, addQuery, deleteQuery } = useQuerystring();
 
   const series = [
     {
@@ -45,8 +44,11 @@ export default function Chart() {
       type: 'bar',
       stacked: false,
       events: {
-        click: (event, chartContext, config) => {
-          setCurrentLocal(idList[config.dataPointIndex]);
+        click: config => {
+          const clickLocalData = idList[config.dataPointIndex];
+          queries.includes(clickLocalData)
+            ? deleteQuery(clickLocalData)
+            : addQuery(clickLocalData);
         },
       },
       toolbar: {
@@ -105,9 +107,13 @@ export default function Chart() {
       },
     },
     colors: [
-      '#66C7F4',
       ({ dataPointIndex }: { dataPointIndex: any }) => {
-        return idList[dataPointIndex] === currentLocal ? '#e9184b' : '#99C2A2';
+        const clickLocalData = idList[dataPointIndex];
+        return queries.includes(clickLocalData) ? '#e9184b' : '#66C7F4';
+      },
+      ({ dataPointIndex }: { dataPointIndex: any }) => {
+        const clickLocalData = idList[dataPointIndex];
+        return queries.includes(clickLocalData) ? '#e9184b' : '#99C2A2';
       },
     ],
     tooltip: {
@@ -130,7 +136,7 @@ export default function Chart() {
         className='icon'
         onClick={() => setIsFilterOpen(!isFilterOpen)}
       />
-      <Filter isFilterOpen={isFilterOpen} setCurrentLocal={setCurrentLocal} />
+      <Filter isFilterOpen={isFilterOpen} />
     </Container>
   );
 }

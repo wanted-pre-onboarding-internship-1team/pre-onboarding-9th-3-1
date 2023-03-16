@@ -6,6 +6,7 @@ export default function useQuerystring() {
   const queries = searchParams.getAll('local');
 
   const addQuery = (value: string) => {
+    if (value === undefined) return;
     searchParams.append('local', value);
     setSearchParams(searchParams);
   };

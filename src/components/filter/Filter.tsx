@@ -1,22 +1,14 @@
 import useMockList from '../../hooks/useMockList';
 import useQuerystring from '../../hooks/useQuerystring';
+import { StyleProps } from './types/StyleProps';
 import React from 'react';
 import styled from 'styled-components';
 
-interface ButtonContainerProps {
-  isFilterOpen?: boolean;
-  checked?: boolean;
-}
-
-export default function Filter({
-  isFilterOpen,
-}: {
-  setCurrentLocal: React.Dispatch<React.SetStateAction<string>>;
-  isFilterOpen: boolean;
-}) {
+export default function Filter({ isFilterOpen }: { isFilterOpen: boolean }) {
   const { idList } = useMockList();
-  const localList = [...new Set(idList)];
   const { queries, addQuery, deleteQuery } = useQuerystring();
+
+  const localList = [...new Set(idList)];
 
   const handleFilterButton = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -50,7 +42,7 @@ export default function Filter({
   );
 }
 
-const ButtonContainer = styled.div<ButtonContainerProps>`
+const ButtonContainer = styled.div<StyleProps>`
   display: ${({ isFilterOpen }) => {
     return isFilterOpen ? 'true' : 'none';
   }};
@@ -75,7 +67,7 @@ const FilterButton = styled.input`
   display: none;
   text-align: center;
 `;
-const FilterLabel = styled.label<ButtonContainerProps>`
+const FilterLabel = styled.label<StyleProps>`
   font-size: 13px;
   cursor: pointer;
   background-color: ${({ checked }) => {
