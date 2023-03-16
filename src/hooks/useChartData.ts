@@ -8,7 +8,7 @@ const useChartData = () => {
 
   useEffect(() => {
     getData();
-  }, [getData]);
+  }, []);
 
   const categories = Object.keys(data);
   const id = Object.values(data).map(data => data.id);
