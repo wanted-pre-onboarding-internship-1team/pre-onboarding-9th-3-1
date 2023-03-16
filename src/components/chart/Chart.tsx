@@ -29,9 +29,10 @@ export default function Chart() {
   ];
   const chartOptions: ApexOptions = {
     legend: {
-      horizontalAlign: 'center',
-      offsetX: 900,
-      offsetY: 20,
+      position: 'top',
+      horizontalAlign: 'left',
+      offsetX: 50,
+      offsetY: 10,
       onItemClick: {
         toggleDataSeries: true,
       },
@@ -44,15 +45,12 @@ export default function Chart() {
       type: 'bar',
       stacked: false,
       events: {
-        click: config => {
+        click: (event, chart, config) => {
           const clickLocalData = idList[config.dataPointIndex];
           queries.includes(clickLocalData)
             ? deleteQuery(clickLocalData)
             : addQuery(clickLocalData);
         },
-      },
-      toolbar: {
-        offsetY: -20,
       },
     },
     stroke: {
@@ -109,7 +107,7 @@ export default function Chart() {
     colors: [
       ({ dataPointIndex }: { dataPointIndex: any }) => {
         const clickLocalData = idList[dataPointIndex];
-        return queries.includes(clickLocalData) ? '#e9184b' : '#66C7F4';
+        return queries.includes(clickLocalData) ? '#45a054' : '#66C7F4';
       },
       ({ dataPointIndex }: { dataPointIndex: any }) => {
         const clickLocalData = idList[dataPointIndex];
@@ -124,7 +122,7 @@ export default function Chart() {
           barValueList,
           areaValueList,
           idList,
-          currentLocal,
+          queries,
         }),
     },
   };
@@ -147,14 +145,14 @@ function createCustomTooltip({
   barValueList,
   areaValueList,
   idList,
-  currentLocal,
+  queries,
 }: {
   opt: any;
   timeList: string[];
   barValueList: number[];
   areaValueList: number[];
   idList: string[];
-  currentLocal: string;
+  queries: string[];
 }) {
   const index = opt.dataPointIndex;
   return `
@@ -164,14 +162,14 @@ function createCustomTooltip({
 							</li>
 							<li class='arrow-box__item'>
 								<div style="background:${
-                  opt.w.globals.colors[0]
+                  queries.includes(idList[index]) ? '#45a054' : '#66C7F4'
                 }; width:10px; height:10px; border-radius:10px"></div>
 								<div>Area: </div>
 								<div>${areaValueList[index]}</div>
                 </li>
                 <li class='arrow-box__item'>
 								<div style="background:${
-                  idList[index] === currentLocal ? '#e9184b' : '#99C2A2'
+                  queries.includes(idList[index]) ? '#e9184b' : '#99C2A2'
                 }; width:10px; height:10px; border-radius:10px"></div>
 								<div>Bar: </div>
 								<div>${barValueList[index]}</div>
@@ -206,7 +204,7 @@ const Container = styled.div`
 
   .icon {
     position: absolute;
-    top: -19px;
+    top: 0px;
     right: 140px;
     cursor: pointer;
     font-size: 23px;

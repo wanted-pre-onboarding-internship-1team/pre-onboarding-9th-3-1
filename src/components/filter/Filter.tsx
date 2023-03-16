@@ -47,21 +47,32 @@ const ButtonContainer = styled.div<StyleProps>`
     return isFilterOpen ? 'true' : 'none';
   }};
   position: absolute;
-  top: -30px;
-  right: 170px;
+  top: -65px;
+  right: 10px;
   background-color: ${({ isFilterOpen }) => {
     return isFilterOpen && '#d0e8f2';
   }};
   border-radius: ${({ isFilterOpen }) => {
     return isFilterOpen && '10px';
   }};
+
+  &:after {
+    border-top: 15px solid #d0e8f2;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 0px solid transparent;
+    content: '';
+    position: absolute;
+    top: 50px;
+    left: 160px;
+  }
 `;
 const FilterButtonUl = styled.ul``;
 const FilterButtonLi = styled.li`
   border-inline: none;
   display: inline-block;
   margin: 7px;
-  padding: 5px;
+  padding: 10px 5px;
 `;
 const FilterButton = styled.input`
   display: none;
@@ -70,6 +81,7 @@ const FilterButton = styled.input`
 const FilterLabel = styled.label<StyleProps>`
   font-size: 13px;
   cursor: pointer;
+  padding: 5px 10px;
   background-color: ${({ checked }) => {
     return checked && 'white';
   }};
