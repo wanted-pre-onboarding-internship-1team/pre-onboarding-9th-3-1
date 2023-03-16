@@ -1,13 +1,21 @@
+import { useFilter } from '../hooks/useFilter';
 import useMockList from '../hooks/useMockList';
-import React, { ChangeEvent, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 const ChartFilter = () => {
   const { idList } = useMockList();
+  const [filter, addFilter, deleteFilter] = useFilter();
   const ids = Array.from(new Set(idList));
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
+    const { checked, value } = e.target;
+
+    if (checked === true) {
+      addFilter(value);
+    } else {
+      deleteFilter(value);
+    }
   };
 
   return (
@@ -16,10 +24,10 @@ const ChartFilter = () => {
         return (
           <CheckBoxWrapper key={index}>
             <CheckBox
+              checked={filter.includes(id)}
               key={index}
               type='checkbox'
-              name='id'
-              value='id'
+              value={id}
               onChange={handleChange}
             />
             {id}
