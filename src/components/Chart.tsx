@@ -1,3 +1,4 @@
+import { useFilter } from '../hooks/useFilter';
 import useMockList from '../hooks/useMockList';
 import { ApexOptions } from 'apexcharts';
 import ApexCharts from 'react-apexcharts';
@@ -5,6 +6,8 @@ import styled from 'styled-components';
 
 export default function Chart() {
   const { timeList, idList, barValueList, areaValueList } = useMockList();
+  const [filter, addFilter] = useFilter();
+
   const series = [
     {
       name: 'area',
@@ -22,12 +25,12 @@ export default function Chart() {
       events: {
         dataPointSelection: (event, chartContext, config) => {
           const index = config.dataPointIndex;
-          console.log(index);
+          addFilter(idList[index]);
         },
       },
     },
     fill: {
-      type: 'gradient',
+      type: 'solid',
       gradient: {
         shade: 'light',
         type: 'vertical',
@@ -76,7 +79,27 @@ export default function Chart() {
         rotate: 0,
       },
     },
-    colors: ['#66C7F4', '#99C2A2'],
+    stroke: {
+      width: [2, 1],
+    },
+    colors: [
+      function (e: any) {
+        const id = idList[e.dataPointIndex];
+        if (filter.includes(id) || filter.length === 0) {
+          return '#138db3';
+        } else {
+          return '#581919';
+        }
+      },
+      function (e: any) {
+        const id = idList[e.dataPointIndex];
+        if (filter.includes(id)) {
+          return '#581919';
+        } else {
+          return '#138db3';
+        }
+      },
+    ],
     tooltip: {
       custom: (opt: any) =>
         createCustomTooltip({
