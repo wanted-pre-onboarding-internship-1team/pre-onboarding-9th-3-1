@@ -11,6 +11,7 @@ import {
   Tooltip,
   LineController,
   BarController,
+  ChartData,
 } from 'chart.js';
 import { useEffect, useState } from 'react';
 import { Chart } from 'react-chartjs-2';
@@ -28,24 +29,10 @@ ChartJS.register(
   BarController
 );
 
-const defaultData = {
-  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-  datasets: [
-    {
-      label: 'Dataset 1',
-      data: [1, 2, 3, 4, 5, 6, 7],
-      backgroundColor: 'rgba(255, 99, 132, 0.5)',
-    },
-    {
-      label: 'Dataset 2',
-      data: [1, 2, 3, 4, 5, 6, 7],
-      backgroundColor: 'rgba(53, 162, 235, 0.5)',
-    },
-  ],
-};
-
 const ChartView = () => {
-  const [chartdata, setChartData] = useState(defaultData);
+  const [chartdata, setChartData] = useState<ChartData>({
+    datasets: [],
+  });
   const { data, getChartData, getKeys } = useChartContext();
 
   const processData = () => {
