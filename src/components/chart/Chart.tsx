@@ -10,7 +10,6 @@ import styled from 'styled-components';
 
 export default function Chart() {
   const { timeList, idList, barValueList, areaValueList } = useMockList();
-  const [currentLocal, setCurrentLocal] = useState<string>('');
   const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
 
   const { queries, addQuery, deleteQuery } = useQuerystring();
