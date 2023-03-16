@@ -88,16 +88,26 @@ export default function Chart() {
         return '#5bc0de';
       },
     ],
-    // tooltip: {
-    //   custom: (opt: any) =>
-    //     createCustomTooltip({
-    //       opt,
-    //       timeList,
-    //       barValueList,
-    //       areaValueList,
-    //       idList,
-    //     }),
-    // },
+    tooltip: {
+      custom: function ({
+        seriesIndex,
+        dataPointIndex,
+        w,
+      }: {
+        seriesIndex: number;
+        dataPointIndex: number;
+        w: any;
+      }) {
+        const data = w.globals.initialSeries[seriesIndex].data[dataPointIndex];
+        return `
+        <ul class="tooltip">
+          <li class="tooltip__inner-title">${data.id}<br /></li>
+          <li class="tooltip__inner">value_area : ${data.area}<br /></li>
+          <li class="tooltip__inner">value_bar : ${data.bar}<br /></li>
+        <ul>
+          `;
+      },
+    },
   };
   return (
     <Container>
@@ -107,58 +117,20 @@ export default function Chart() {
   );
 }
 
-function createCustomTooltip({
-  opt,
-  timeList,
-  barValueList,
-  areaValueList,
-  idList,
-}: {
-  opt: any;
-  timeList: string[];
-  barValueList: number[];
-  areaValueList: number[];
-  idList: string[];
-}) {
-  const index = opt.dataPointIndex;
-  return `
-						<ul class='arrow-box'>
-							<li class='arrow-box__item'>
-								${timeList[index]}
-							</li>
-							<li class='arrow-box__item'>
-								<div style="background:${opt.w.globals.colors[0]}; width:10px; height:10px; border-radius:10px"></div>
-								<div>bar: </div>
-								<div>${barValueList[index]}</div>
-							</li>
-							<li class='arrow-box__item'>
-								<div style="background:${opt.w.globals.colors[1]}; width:10px; height:10px; border-radius:10px"></div>
-								<div>area: </div>
-								<div>${areaValueList[index]}</div>
-							</li>
-							<li class='arrow-box__item'>
-								
-								<div>지역: </div>
-								<div>${idList[index]}</div>
-							</li>
-						</ul>
-					`;
-}
-
 const Container = styled.div`
   width: 100%;
   max-width: 1200px;
 
-  .arrow-box {
-  }
-
-  .arrow-box li {
-    padding: 5px 10px;
-  }
-
-  .arrow-box__item {
+  .tooltip {
+    background-color: #fff;
     display: flex;
-    gap: 5px;
+    flex-direction: column;
     align-items: center;
+    padding: 1rem;
+  }
+
+  .tooltip__inner-title {
+    font-size: 1.5rem;
+    font-weight: 800;
   }
 `;
