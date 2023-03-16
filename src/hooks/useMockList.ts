@@ -16,11 +16,27 @@ export default function useMockList() {
     : [];
 
   const barValueList = originData
-    ? Object.values(originData).map(entry => entry.value_bar)
+    ? Object.values(originData).map((item, index) => {
+        return {
+          y: item.value_bar,
+          x: index,
+          id: item.id,
+          area: item.value_area,
+          bar: item.value_bar,
+        };
+      })
     : [];
 
   const areaValueList = originData
-    ? Object.values(originData).map(entry => entry.value_area)
+    ? Object.values(originData).map((item, index) => {
+        return {
+          y: item.value_area,
+          x: index,
+          id: item.id,
+          area: item.value_area,
+          bar: item.value_bar,
+        };
+      })
     : [];
 
   useEffect(() => {
