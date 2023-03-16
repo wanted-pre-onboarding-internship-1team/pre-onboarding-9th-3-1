@@ -1,15 +1,15 @@
 import useMockList from '../hooks/useMockList';
+import useParam from '../hooks/useParam';
 import ChartFilter from './ChartFilter';
 import { ApexOptions } from 'apexcharts';
 import ApexCharts from 'react-apexcharts';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 export default function Chart() {
   const navigator = useNavigate();
-  const { timeList, idList, barValueList, areaValueList } = useMockList();
-  const { search } = useLocation();
-  const filter = new URLSearchParams(search).get('filter') || '';
+  const { timeList, barValueList, areaValueList } = useMockList();
+  const filter = useParam('filter');
   const series = [
     {
       name: 'area',
