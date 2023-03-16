@@ -218,9 +218,6 @@ const Container = styled.div`
   width: 100%;
   max-width: 1200px;
 
-  .arrow-box {
-  }
-
   .arrow-box li {
     padding: 5px 10px;
   }
