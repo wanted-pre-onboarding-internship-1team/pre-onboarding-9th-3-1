@@ -50,6 +50,10 @@ export default function Chart() {
         title: {
           text: 'area',
         },
+        //area 그래프를 50프로 까지 보이게하기
+        max: max => {
+          return max * 2;
+        },
       },
       {
         opposite: true,
