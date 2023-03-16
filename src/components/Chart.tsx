@@ -18,6 +18,14 @@ export default function Chart() {
     },
   ];
   const chartOptions: ApexOptions = {
+    chart: {
+      events: {
+        dataPointSelection: (event, chartContext, config) => {
+          const index = config.dataPointIndex;
+          console.log(index);
+        },
+      },
+    },
     fill: {
       type: 'gradient',
       gradient: {
@@ -31,8 +39,8 @@ export default function Chart() {
     },
     yaxis: [
       {
-        opposite: true,
         seriesName: 'area',
+
         axisTicks: {
           show: true,
         },
@@ -44,6 +52,7 @@ export default function Chart() {
         },
       },
       {
+        opposite: true,
         seriesName: 'bar',
         axisTicks: {
           show: true,
