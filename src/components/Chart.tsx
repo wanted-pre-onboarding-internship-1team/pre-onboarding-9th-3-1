@@ -79,7 +79,15 @@ export default function Chart() {
     },
     colors: [
       'skyblue',
-      function ({ seriesIndex, dataPointIndex, w }: any) {
+      function ({
+        seriesIndex,
+        dataPointIndex,
+        w,
+      }: {
+        seriesIndex: number;
+        dataPointIndex: number;
+        w: any;
+      }) {
         const { id } =
           w.globals.initialSeries[seriesIndex].data[dataPointIndex];
         if (filter) {
