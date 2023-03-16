@@ -1,3 +1,4 @@
+import { COMMON_COLOR } from './../constants/colors';
 import styled from 'styled-components';
 
 export default function ChartHeader() {
@@ -17,7 +18,7 @@ const H1 = styled.h1`
   line-height: 1.3em;
   font-size: 5rem;
   font-style: italic;
-  color: #abfcc689;
+  color: ${COMMON_COLOR.title};
   font-weight: bold;
 `;
 
@@ -29,6 +30,6 @@ const SubTitle = styled.span`
   bottom: 10px;
   left: 50%;
   transform: translate(-50%);
-  color: #98989883;
+  color: ${COMMON_COLOR.subTitle};
   white-space: nowrap;
 `;

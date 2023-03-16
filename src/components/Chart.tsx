@@ -1,3 +1,4 @@
+import { CHART_COLOR } from '../constants/colors';
 import useMockList from '../hooks/useMockList';
 import useFilterList from './../hooks/useFilterList';
 import { ApexOptions } from 'apexcharts';
@@ -29,11 +30,11 @@ export default function Chart() {
       seriesIndex: 0,
       marker: {
         size: 4,
-        strokeColor: '#FF4560',
+        strokeColor: CHART_COLOR.areaPoint,
         radius: 2,
       },
       label: {
-        borderColor: '#FF4560',
+        borderColor: CHART_COLOR.areaPoint,
         offsetY: 0,
       },
     };
@@ -88,17 +89,18 @@ export default function Chart() {
     fill: {
       colors: [
         () => {
-          if (!idList.includes(currentFilter)) return '#66C7F4';
-          return '#66c7f489';
+          if (!idList.includes(currentFilter)) return CHART_COLOR.area;
+          return CHART_COLOR.areaLight;
         },
         (options: any) => {
           const { dataPointIndex } = options;
 
-          if (!idList.includes(currentFilter)) return '#a9d197';
+          if (!idList.includes(currentFilter)) return CHART_COLOR.bar;
 
-          if (idList[dataPointIndex] === currentFilter) return '#d63c31';
+          if (idList[dataPointIndex] === currentFilter)
+            return CHART_COLOR.barPoint;
 
-          return '#a2be9592';
+          return CHART_COLOR.barLight;
         },
       ],
     },
@@ -152,7 +154,7 @@ export default function Chart() {
     legend: {
       show: true,
       markers: {
-        fillColors: ['#66C7F4', '#99C2A2'],
+        fillColors: [CHART_COLOR.area, CHART_COLOR.bar],
       },
     },
     tooltip: {

@@ -1,3 +1,4 @@
+import { BUTTON_COLOR } from '../../constants/colors';
 import { MouseEventHandler } from 'react';
 import styled from 'styled-components';
 
@@ -19,15 +20,15 @@ const Btn = styled.button<{ isActive: boolean }>`
   padding: 10px 20px;
   border: none;
   border-radius: 20px;
-  color: #fff;
+  color: ${BUTTON_COLOR.textLight};
   cursor: pointer;
 
   background-color: ${({ isActive }) => {
-    return isActive ? '#6c998b' : '#74d3a3';
+    return isActive ? BUTTON_COLOR.active : BUTTON_COLOR.default;
   }};
 
   &:hover {
-    background-color: #6c998b;
+    background-color: ${BUTTON_COLOR.active};
   }
 `;
 
