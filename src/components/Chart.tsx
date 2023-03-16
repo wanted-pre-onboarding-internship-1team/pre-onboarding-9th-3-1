@@ -1,4 +1,5 @@
 import useMockList from '../hooks/useMockList';
+import ChartFilter from './ChartFilter';
 import { ApexOptions } from 'apexcharts';
 import ApexCharts from 'react-apexcharts';
 import styled from 'styled-components';
@@ -67,7 +68,7 @@ export default function Chart() {
     ],
     xaxis: {
       categories: timeList,
-      tickAmount: 6,
+      tickAmount: 8,
       labels: {
         rotate: 0,
       },
@@ -86,6 +87,7 @@ export default function Chart() {
   };
   return (
     <Container>
+      <ChartFilter />
       <ApexCharts options={chartOptions} series={series} height={600} />
     </Container>
   );
