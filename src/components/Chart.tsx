@@ -2,10 +2,14 @@ import useMockList from '../hooks/useMockList';
 import ChartFilter from './ChartFilter';
 import { ApexOptions } from 'apexcharts';
 import ApexCharts from 'react-apexcharts';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 export default function Chart() {
+  const navigator = useNavigate();
   const { timeList, idList, barValueList, areaValueList } = useMockList();
+  const { search } = useLocation();
+  const filter = new URLSearchParams(search).get('filter') || '';
   const series = [
     {
       name: 'area',
@@ -21,20 +25,17 @@ export default function Chart() {
   const chartOptions: ApexOptions = {
     chart: {
       events: {
-        dataPointSelection: (event, chartContext, config) => {
-          const index = config.dataPointIndex;
-          console.log(index);
+        click: (event, chartContext, config) => {
+          const index = config?.dataPointIndex;
+          const { id } = config.globals.initialSeries[0].data[index];
+          if (id) navigator(`/?filter=${id}`);
         },
       },
     },
     fill: {
-      type: 'gradient',
       gradient: {
         shade: 'light',
         type: 'vertical',
-        shadeIntensity: 1,
-        opacityFrom: 0.1,
-        opacityTo: 1,
         stops: [0, 100],
       },
     },
@@ -73,17 +74,30 @@ export default function Chart() {
         rotate: 0,
       },
     },
-    colors: ['#66C7F4', '#99C2A2'],
-    tooltip: {
-      custom: (opt: any) =>
-        createCustomTooltip({
-          opt,
-          timeList,
-          barValueList,
-          areaValueList,
-          idList,
-        }),
+    stroke: {
+      width: [2, 1],
     },
+    colors: [
+      'skyblue',
+      function ({ seriesIndex, dataPointIndex, w }: any) {
+        const { id } =
+          w.globals.initialSeries[seriesIndex].data[dataPointIndex];
+        if (filter) {
+          if (id === filter) return '#D9534F';
+        }
+        return '#5bc0de';
+      },
+    ],
+    // tooltip: {
+    //   custom: (opt: any) =>
+    //     createCustomTooltip({
+    //       opt,
+    //       timeList,
+    //       barValueList,
+    //       areaValueList,
+    //       idList,
+    //     }),
+    // },
   };
   return (
     <Container>
