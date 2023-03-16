@@ -22,7 +22,7 @@ const ChartFilter = () => {
           key={idx}
           value={id}
           onClickHandler={onClickHandler}
-          isActive={id === currentFilter || !idx}
+          isActive={currentFilter ? id === currentFilter : !idx}
         />
       ))}
     </ChartFilterWrapper>
