@@ -10,7 +10,11 @@ export default function ChartHeader() {
 }
 
 const Header = styled.header`
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
 `;
 
 const H1 = styled.h1`
@@ -21,12 +25,8 @@ const H1 = styled.h1`
 `;
 
 const SubTitle = styled.span`
-  position: absolute;
-  bottom: 0;
   font-size: 1.6rem;
   font-weight: bold;
-  bottom: 10px;
-  left: 50%;
-  transform: translate(-50%);
+
   color: #98989883;
 `;
