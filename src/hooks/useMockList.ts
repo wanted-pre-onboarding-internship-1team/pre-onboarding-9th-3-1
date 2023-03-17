@@ -15,6 +15,8 @@ export default function useMockList() {
     ? Object.values(originData).map(entry => entry.id)
     : [];
 
+  const location = idList ? [...new Set(idList.map(data => data))] : [];
+
   const barValueList = originData
     ? Object.values(originData).map(entry => entry.value_bar)
     : [];
@@ -23,6 +25,8 @@ export default function useMockList() {
     ? Object.values(originData).map(entry => entry.value_area)
     : [];
 
+  const filterList = originData ? Object.values(originData) : [];
+
   useEffect(() => {
     api.mock.getMockDatas().then(res => {
       const { data } = res;
@@ -30,5 +34,13 @@ export default function useMockList() {
     });
   }, []);
 
-  return { timeList, dateList, idList, barValueList, areaValueList };
+  return {
+    timeList,
+    dateList,
+    idList,
+    barValueList,
+    areaValueList,
+    location,
+    filterList,
+  };
 }

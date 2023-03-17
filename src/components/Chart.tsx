@@ -1,40 +1,93 @@
 import useMockList from '../hooks/useMockList';
 import { ApexOptions } from 'apexcharts';
+import { useState, useEffect } from 'react';
 import ApexCharts from 'react-apexcharts';
+import { useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 export default function Chart() {
-  const { timeList, idList, barValueList, areaValueList } = useMockList();
+  const { timeList, idList, barValueList, areaValueList, filterList } =
+    useMockList();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const currentParams = searchParams.get('id');
+  const [highlightedIndex, setHighlightedIndex] = useState<number>(
+    currentParams ? idList.findIndex(id => id === currentParams) : -1
+  );
+
+  const [highlightedValues, setHighlightedValues] = useState<{
+    bar: (number | null)[];
+    area: (number | null)[];
+  }>({
+    bar: barValueList.map((val, idx) =>
+      idx === highlightedIndex ? val : null
+    ),
+    area: areaValueList.map((val, idx) =>
+      idx === highlightedIndex ? val : null
+    ),
+  });
+  useEffect(() => {
+    if (currentParams) {
+      const index = idList.findIndex(id => id === currentParams);
+      if (index !== -1) {
+        setHighlightedIndex(index);
+        const newBarValues = barValueList.map((val, idx) =>
+          idx === index ? val : null
+        );
+        const newAreaValues = areaValueList.map((val, idx) =>
+          idx === index ? val : null
+        );
+        for (let i = 0; i < idList.length; i++) {
+          if (idList[i] === currentParams) {
+            newBarValues[i] = barValueList[i];
+            newAreaValues[i] = areaValueList[i];
+          }
+        }
+        setHighlightedValues({
+          bar: newBarValues,
+          area: newAreaValues,
+        });
+      }
+    }
+  }, [currentParams]);
+
   const series = [
     {
       name: 'area',
       type: 'area',
-      data: areaValueList,
+      data: areaValueList.map((val, idx) => ({
+        x: timeList[idx],
+        y: val,
+      })),
     },
     {
       name: 'bar',
       type: 'column',
-      data: barValueList,
+      data: barValueList.map((val, idx) => ({
+        x: timeList[idx],
+        y: val,
+      })),
     },
   ];
+
   const chartOptions: ApexOptions = {
     chart: {
       events: {
-        dataPointSelection: (event, chartContext, config) => {
-          const index = config.dataPointIndex;
-          console.log(index);
+        click: (event, chartContext, config) => {
+          const clickedIndex = config.dataPointIndex;
+          const clicked = idList[clickedIndex];
+          if (clicked) {
+            setSearchParams({ id: clicked });
+            setHighlightedIndex(clickedIndex);
+            setHighlightedValues({
+              bar: barValueList.map((val, idx) =>
+                idx === clickedIndex ? val : highlightedValues.bar[idx]
+              ),
+              area: areaValueList.map((val, idx) =>
+                idx === clickedIndex ? val : highlightedValues.area[idx]
+              ),
+            });
+          }
         },
-      },
-    },
-    fill: {
-      type: 'gradient',
-      gradient: {
-        shade: 'light',
-        type: 'vertical',
-        shadeIntensity: 1,
-        opacityFrom: 0.1,
-        opacityTo: 1,
-        stops: [0, 100],
       },
     },
     yaxis: [
@@ -50,6 +103,7 @@ export default function Chart() {
         title: {
           text: 'area',
         },
+        max: 100,
       },
       {
         opposite: true,
@@ -72,8 +126,34 @@ export default function Chart() {
         rotate: 0,
       },
     },
-    colors: ['#66C7F4', '#99C2A2'],
+    stroke: {
+      width: [2, 1],
+    },
+    colors: [
+      '#66C7F4',
+      function ({
+        value,
+        dataPointIndex,
+        w,
+      }: {
+        value: number;
+        dataPointIndex: number;
+        w: any;
+      }) {
+        if (currentParams === null) return '#99C2A2';
+        if (
+          highlightedValues &&
+          highlightedValues.bar[dataPointIndex] !== undefined &&
+          highlightedValues.bar[dataPointIndex] === value
+        ) {
+          return '#D9534F';
+        }
+        return '#99C2A2';
+      },
+    ],
     tooltip: {
+      intersect: true,
+      shared: false,
       custom: (opt: any) =>
         createCustomTooltip({
           opt,
