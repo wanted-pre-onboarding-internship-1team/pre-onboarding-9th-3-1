@@ -124,12 +124,12 @@ function createCustomTooltip({
 								${timeList[index]}
 							</li>
 							<li class='arrow-box__item'>
-								<div style="background:${opt.w.globals.colors[0]}; width:10px; height:10px; border-radius:10px"></div>
+								<div style="background:${opt.w.globals.colors[1]}; width:10px; height:10px; border-radius:10px"></div>
 								<div>bar: </div>
 								<div>${barValueList[index]}</div>
 							</li>
 							<li class='arrow-box__item'>
-								<div style="background:${opt.w.globals.colors[1]}; width:10px; height:10px; border-radius:10px"></div>
+								<div style="background:${opt.w.globals.colors[0]}; width:10px; height:10px; border-radius:10px"></div>
 								<div>area: </div>
 								<div>${areaValueList[index]}</div>
 							</li>
