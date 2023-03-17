@@ -23,7 +23,7 @@ const H1 = styled.h1`
 const SubTitle = styled.span`
   position: absolute;
   bottom: 0;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: bold;
   bottom: 10px;
   left: 50%;
