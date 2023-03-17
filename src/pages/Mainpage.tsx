@@ -1,5 +1,5 @@
-import Chart from '../components/Chart';
-import ChartHeader from '../components/ChartHeader';
+import Chart from '../components/chart/Chart';
+import ChartHeader from '../components/chart/ChartHeader';
 import styled from 'styled-components';
 
 export default function Mainpage() {
