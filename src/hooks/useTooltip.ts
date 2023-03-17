@@ -1,9 +1,18 @@
-import Tooltip from '../components/Tooltip';
-import { TooltipProps } from '../interface/Tooltip';
+import { useDataValueContext } from '../contexts/DataContext';
+import { createCustomTooltip } from '../utils/chartUtils';
 
 export default function useTooltip() {
+  const { timeList, idList, barValueList, areaValueList } =
+    useDataValueContext();
   const tooltip = {
-    custom: (opt: TooltipProps) => Tooltip(opt),
+    custom: (opt: any) =>
+      createCustomTooltip({
+        opt,
+        timeList,
+        barValueList,
+        areaValueList,
+        idList,
+      }),
   };
   return tooltip;
 }
