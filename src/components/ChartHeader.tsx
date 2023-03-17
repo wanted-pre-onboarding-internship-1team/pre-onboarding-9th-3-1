@@ -1,23 +1,12 @@
-import { useDataIDContext } from '../contexts/DataContext';
+import IDSelectButtons from './IDSelectButtons';
 import styled from 'styled-components';
 
 export default function ChartHeader() {
-  const { setSelectID, idSet } = useDataIDContext();
   return (
     <Header>
       <H1>Flexsys</H1>
       <SubTitle>현황 그래프</SubTitle>
-      {Array.from(idSet).map(id => {
-        return (
-          <button
-            key={id}
-            onClick={() => {
-              setSelectID && setSelectID(id);
-            }}>
-            {id}
-          </button>
-        );
-      })}
+      <IDSelectButtons />
     </Header>
   );
 }
