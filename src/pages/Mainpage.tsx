@@ -47,6 +47,7 @@ export default function Mainpage() {
           height='400px'
           options={options}
           chartEvents={chartEvents}
+          chartWrapperParams={{ view: { columns: [0, 2, 4, 5, 6] } }}
         />
       );
 

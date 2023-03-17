@@ -18,22 +18,24 @@ const useChartdata = () => {
         const newDataArray = Object.entries(data).map(([key, value]) => {
           return [
             key,
+            value.id,
             value.value_bar,
+            value.id,
             createTooltip(value),
             value.value_area,
             createTooltip(value),
-            value.id,
           ];
         });
 
         const dataTable = [
           [
             { label: 'Time', type: 'string' },
+            { label: 'id', type: 'string' },
             { label: 'value_bar', type: 'number' },
+            { label: 'id', type: 'string' },
             { role: 'tooltip', type: 'string', p: { html: true } },
             { label: 'value_area', type: 'number' },
             { role: 'tooltip', type: 'string', p: { html: true } },
-            { label: 'id', type: 'string' },
           ],
           ...newDataArray,
         ];
