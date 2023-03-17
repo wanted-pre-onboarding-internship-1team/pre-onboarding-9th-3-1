@@ -1,4 +1,5 @@
 import Chart from '../components/Chart';
+import ChartFilter from '../components/ChartFilter';
 import ChartHeader from '../components/ChartHeader';
 import styled from 'styled-components';
 
@@ -6,6 +7,7 @@ export default function Mainpage() {
   return (
     <Container>
       <ChartHeader />
+      <ChartFilter />
       <Chart />
     </Container>
   );

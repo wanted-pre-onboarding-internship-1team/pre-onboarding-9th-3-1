@@ -3,15 +3,12 @@ import { ApexOptions } from 'apexcharts';
 import { useEffect, useState } from 'react';
 import ApexCharts from 'react-apexcharts';
 import { createPortal } from 'react-dom';
-import { useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 export default function Chart() {
   const { timeList, idList, barValueList, areaValueList } = useMockList();
   const [selectedArea, setSelectedArea] = useState('');
-  const [params, setParams] = useSearchParams();
 
-  console.log(123);
   const series = [
     {
       name: 'area',

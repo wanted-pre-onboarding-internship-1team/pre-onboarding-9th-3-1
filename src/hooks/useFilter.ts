@@ -1,10 +1,13 @@
-import { useSearchParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 
 export default function useFilter() {
   const [params, setParams] = useSearchParams();
+  const currentParam = params.get('filter');
+  console.log(currentParam);
   const pushParams = (filter: string) => {
-    const currentParam = params.get('filter') || '';
-    if (currentParam === filter) return setParams({});
+    console.log(currentParam, filter);
+
+    if (currentParam === filter) return setParams({ a: '1' });
 
     setParams({ filter });
   };
