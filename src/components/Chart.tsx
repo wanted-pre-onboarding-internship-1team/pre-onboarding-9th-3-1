@@ -4,7 +4,15 @@ import ApexCharts from 'react-apexcharts';
 import styled from 'styled-components';
 
 export default function Chart() {
-  const { timeList, idList, barValueList, areaValueList } = useMockList();
+  const {
+    timeList,
+    idList,
+    barValueList,
+    areaValueList,
+    selectedID,
+    setSelectID,
+    idSet,
+  } = useMockList();
   const series = [
     {
       name: 'area',
@@ -27,9 +35,9 @@ export default function Chart() {
       },
     },
     fill: {
-      type: 'gradient',
+      //   type: 'gradient',
       gradient: {
-        shade: 'light',
+        // shade: 'light',
         type: 'vertical',
         shadeIntensity: 1,
         opacityFrom: 0.1,
@@ -72,7 +80,20 @@ export default function Chart() {
         rotate: 0,
       },
     },
-    colors: ['#66C7F4', '#99C2A2'],
+    colors: [
+      function ({ dataPointIndex }: unknown) {
+        return '#66C7F4';
+      },
+      function ({ dataPointIndex }: unknown) {
+        if (idList[dataPointIndex] === selectedID) {
+          return '#FF0000';
+        }
+        return '#99C2A2';
+      },
+    ],
+    stroke: {
+      width: [2, 1],
+    },
     tooltip: {
       custom: (opt: any) =>
         createCustomTooltip({
@@ -86,6 +107,17 @@ export default function Chart() {
   };
   return (
     <Container>
+      {Array.from(idSet).map(id => {
+        return (
+          <button
+            key={id}
+            onClick={() => {
+              setSelectID(id);
+            }}>
+            {id}
+          </button>
+        );
+      })}
       <ApexCharts options={chartOptions} series={series} height={600} />
     </Container>
   );

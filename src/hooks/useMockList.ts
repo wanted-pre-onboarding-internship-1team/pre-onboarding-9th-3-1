@@ -4,6 +4,9 @@ import { useEffect, useState } from 'react';
 
 export default function useMockList() {
   const [originData, setOriginData] = useState<GetMockResponse['response']>();
+  const [selectedID, setSelectID] = useState('전체');
+
+  const [idSet, setIdSet] = useState<Set<string>>(new Set());
 
   const dateList = originData ? Object.keys(originData) : [];
 
@@ -29,6 +32,23 @@ export default function useMockList() {
       setOriginData(data.response);
     });
   }, []);
+  useEffect(() => {
+    if (originData) {
+      const newSet = Object.values(originData).reduce((prevSet, curr) => {
+        return prevSet.add(curr.id);
+      }, new Set(['전체']));
+      setIdSet(newSet);
+    }
+  }, [originData]);
 
-  return { timeList, dateList, idList, barValueList, areaValueList };
+  return {
+    timeList,
+    dateList,
+    idList,
+    barValueList,
+    areaValueList,
+    selectedID,
+    setSelectID,
+    idSet,
+  };
 }
