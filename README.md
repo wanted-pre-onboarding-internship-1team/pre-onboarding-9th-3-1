@@ -1,4 +1,4 @@
-# 원티드 프리온보딩 Week3 기업과제 - 플렉시스
+# 원티드 프리온보딩 Week3 - 플렉시스
 
 <br />
 
@@ -99,9 +99,12 @@ http://wanted-intenship-project2.s3-website.ap-northeast-2.amazonaws.com/
 - Bar 그래프의 기준값은 value_bar 값을 이용해주세요
 - 차트의 Y축에 대략적인 수치를 표현해주세요(예시 이미지 참고)
 
+![](https://user-images.githubusercontent.com/112826154/225865414-fb65aaa0-fecf-435b-8b38-e2e51d7d9b47.png)
+
 > **💡 Best Practice 산정 이유**
 >
-> -
+> - 커스텀 훅으로 차트에 필요한 데이터 분리
+> - 차트에 필요한 데이터가 바뀔 경우 수정하기 용이
 
 <br />
     
@@ -109,12 +112,12 @@ http://wanted-intenship-project2.s3-website.ap-northeast-2.amazonaws.com/
 
 - 특정 데이터 구역에 마우스 호버시 id, value_area, value_bar 데이터를 툴팁 형태로 제공해주세요
 
+![](https://user-images.githubusercontent.com/112826154/225866174-4da55706-cf41-408a-909e-baaa1c01470a.png)
 <br/>
 
 > **💡 Best Practice 산정 이유**
 >
-> -
-> -
+> - tooltip을 custom하여 id, area, bar 데이터 노출
 
 #### ✅ Assignment 3
 
@@ -123,11 +126,11 @@ http://wanted-intenship-project2.s3-website.ap-northeast-2.amazonaws.com/
 - 필터링 시 버튼에서 선택한 ID값과 동일한 ID값을 가진 데이터 구역만 하이라이트 처리를 해주세요
 - 특정 데이터 구역을 클릭 시에도 필터링 기능과 동일한 형태로 동일한 ID값을 가진 데이터 구역을 하이라이트해주세요
 
-> **💡 Best Practice 산정 이유**
->
-> -
+![](https://user-images.githubusercontent.com/112826154/225868056-fca002b6-55a3-465f-be83-6fcd72aa88f1.gif)
 
-<br />
+> **💡 Best Practice 산정 이유** <br />
+> -querystring을 사용하여 필터링 적용 <br /> -필터링 하는 부분을 커스텀 훅을 통해 분리 <br /> -필터링 아이콘 클릭 시 필터링 버튼 노출 <br /> -버튼 형태로 구현하기 위해 input 속성 미노출 <br /> -데이터 구역을 bar는 빨간색, area의 포인터는 청록색으로 하이라이트 <br /> -필터링 시와 특정 데이터 구역 클릭 시 상태 공유하여 구역 클릭 시에도 필터링 속성에 체크 <br /> -필터링 체크 한 지역에 annotaion으로 차트에 표기
+> <br />
 
 ## 💗 팀원 소개
 
