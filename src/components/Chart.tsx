@@ -1,20 +1,27 @@
 import useMockList from '../hooks/useMockList';
 import { ApexOptions } from 'apexcharts';
+import { useEffect, useState } from 'react';
 import ApexCharts from 'react-apexcharts';
+import { createPortal } from 'react-dom';
+import { useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 export default function Chart() {
   const { timeList, idList, barValueList, areaValueList } = useMockList();
+  const [selectedArea, setSelectedArea] = useState('');
+  const [params, setParams] = useSearchParams();
+
+  console.log(123);
   const series = [
     {
       name: 'area',
       type: 'area',
-      data: areaValueList,
+      data: areaValueList.map((v, i) => ({ x: i, y: v, id: idList[i] })),
     },
     {
       name: 'bar',
       type: 'column',
-      data: barValueList,
+      data: barValueList.map((v, i) => ({ x: i, y: v, id: idList[i] })),
     },
   ];
   const chartOptions: ApexOptions = {
@@ -22,21 +29,22 @@ export default function Chart() {
       events: {
         dataPointSelection: (event, chartContext, config) => {
           const index = config.dataPointIndex;
-          console.log(index);
+          //console.log(index);
+        },
+        click(event, chartContext, config) {
+          const index = config.dataPointIndex;
+          const area = idList[index];
+          setSelectedArea(area);
         },
       },
     },
-    fill: {
-      type: 'gradient',
-      gradient: {
-        shade: 'light',
-        type: 'vertical',
-        shadeIntensity: 1,
-        opacityFrom: 0.1,
-        opacityTo: 1,
-        stops: [0, 100],
+
+    plotOptions: {
+      bar: {
+        columnWidth: '100%',
       },
     },
+    stroke: { width: 2 },
     yaxis: [
       {
         seriesName: 'area',
@@ -66,13 +74,25 @@ export default function Chart() {
       },
     ],
     xaxis: {
+      type: 'category',
       categories: timeList,
       tickAmount: 6,
       labels: {
         rotate: 0,
       },
     },
-    colors: ['#66C7F4', '#99C2A2'],
+    colors: [
+      function ({ seriesIndex, dataPointIndex, w }: any) {
+        return '#66C7F4';
+      },
+
+      function ({ seriesIndex, dataPointIndex, w }: any) {
+        // console.log(
+        //   w.globals.initialSeries[seriesIndex].data[dataPointIndex]?.id
+        // );
+        return '#99C2A2';
+      },
+    ],
     tooltip: {
       custom: (opt: any) =>
         createCustomTooltip({
@@ -87,10 +107,11 @@ export default function Chart() {
   return (
     <Container>
       <ApexCharts options={chartOptions} series={series} height={600} />
+      <PotalsTest />
     </Container>
   );
 }
-
+//['#66C7F4', '#99C2A2']
 function createCustomTooltip({
   opt,
   timeList,
@@ -129,6 +150,27 @@ function createCustomTooltip({
 					`;
 }
 
+function PotalsTest() {
+  const [container, setContainer] = useState<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const targetElement = document.querySelector(
+      '.apexcharts-legend '
+    ) as HTMLElement;
+    if (targetElement) {
+      setContainer(targetElement);
+    }
+    console.log(targetElement);
+  }, []);
+
+  return container
+    ? createPortal(<Test>121231ㄹㄷㅈㄹㄷㅈfnxfngfngf23123</Test>, container)
+    : null;
+}
+const Test = styled.div`
+  z-index: 1000;
+`;
+
 const Container = styled.div`
   width: 100%;
   max-width: 1200px;
@@ -144,5 +186,8 @@ const Container = styled.div`
     display: flex;
     gap: 5px;
     align-items: center;
+  }
+
+  .asd {
   }
 `;
