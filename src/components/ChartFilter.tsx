@@ -5,29 +5,18 @@ import styled from 'styled-components';
 
 export default function ChartFilter() {
   const { idList } = useMockList();
-  const pushParams = useFilter();
+  const { currentParam, pushParams } = useFilter();
   const keys = new Set(idList);
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value, checked } = e.target;
-    console.log(checked);
+    const { value } = e.target;
 
     pushParams(value);
   };
 
   return (
     <Container>
-      <CheckBox>
-        <InputBox
-          type='radio'
-          id={'전체'}
-          name='filter'
-          onChange={onChange}
-          value={'전체'}
-        />
-        <Label htmlFor={'전체'}>{'전체'}</Label>
-      </CheckBox>
-      {[...keys].map(item => (
+      {['전체', ...keys].map(item => (
         <CheckBox key={item}>
           <InputBox
             type='radio'
@@ -35,6 +24,7 @@ export default function ChartFilter() {
             name='filter'
             onChange={onChange}
             value={item}
+            checked={currentParam === item}
           />
           <Label htmlFor={item}>{item}</Label>
         </CheckBox>
@@ -50,12 +40,11 @@ const Container = styled.nav`
 
 const CheckBox = styled.div`
   border: 1px solid #60f391;
-  padding: 0.6rem 0.8rem;
   border-radius: 1rem;
-
-  & > input[type='radio']:checked & {
+  overflow: hidden;
+  & > input[type='radio']:checked + label {
     background: #60f391;
-    color: blue;
+    color: white;
   }
 `;
 
@@ -65,5 +54,7 @@ const InputBox = styled.input`
 `;
 
 const Label = styled.label`
+  padding: 0.6rem 0.8rem;
+  display: block;
   cursor: pointer;
 `;

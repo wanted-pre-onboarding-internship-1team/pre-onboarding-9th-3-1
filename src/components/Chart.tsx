@@ -1,13 +1,12 @@
+import useFilter from '../hooks/useFilter';
 import useMockList from '../hooks/useMockList';
 import { ApexOptions } from 'apexcharts';
-import { useEffect, useState } from 'react';
 import ApexCharts from 'react-apexcharts';
-import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 
 export default function Chart() {
   const { timeList, idList, barValueList, areaValueList } = useMockList();
-  const [selectedArea, setSelectedArea] = useState('');
+  const { currentParam, pushParams } = useFilter();
 
   const series = [
     {
@@ -24,14 +23,10 @@ export default function Chart() {
   const chartOptions: ApexOptions = {
     chart: {
       events: {
-        dataPointSelection: (event, chartContext, config) => {
-          const index = config.dataPointIndex;
-          //console.log(index);
-        },
         click(event, chartContext, config) {
           const index = config.dataPointIndex;
           const area = idList[index];
-          setSelectedArea(area);
+          pushParams(area);
         },
       },
     },
@@ -84,9 +79,10 @@ export default function Chart() {
       },
 
       function ({ seriesIndex, dataPointIndex, w }: any) {
-        // console.log(
-        //   w.globals.initialSeries[seriesIndex].data[dataPointIndex]?.id
-        // );
+        const id =
+          w.globals.initialSeries[seriesIndex].data[dataPointIndex]?.id;
+
+        if (id === currentParam) return '	#F9A3A4';
         return '#99C2A2';
       },
     ],
@@ -104,7 +100,6 @@ export default function Chart() {
   return (
     <Container>
       <ApexCharts options={chartOptions} series={series} height={600} />
-      <PotalsTest />
     </Container>
   );
 }
@@ -147,27 +142,6 @@ function createCustomTooltip({
 					`;
 }
 
-function PotalsTest() {
-  const [container, setContainer] = useState<HTMLElement | null>(null);
-
-  useEffect(() => {
-    const targetElement = document.querySelector(
-      '.apexcharts-legend '
-    ) as HTMLElement;
-    if (targetElement) {
-      setContainer(targetElement);
-    }
-    console.log(targetElement);
-  }, []);
-
-  return container
-    ? createPortal(<Test>121231ㄹㄷㅈㄹㄷㅈfnxfngfngf23123</Test>, container)
-    : null;
-}
-const Test = styled.div`
-  z-index: 1000;
-`;
-
 const Container = styled.div`
   width: 100%;
   max-width: 1200px;
@@ -183,8 +157,5 @@ const Container = styled.div`
     display: flex;
     gap: 5px;
     align-items: center;
-  }
-
-  .asd {
   }
 `;

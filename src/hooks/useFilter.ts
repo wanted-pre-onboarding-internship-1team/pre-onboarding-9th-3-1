@@ -3,14 +3,12 @@ import { useParams, useSearchParams } from 'react-router-dom';
 export default function useFilter() {
   const [params, setParams] = useSearchParams();
   const currentParam = params.get('filter');
-  console.log(currentParam);
-  const pushParams = (filter: string) => {
-    console.log(currentParam, filter);
 
-    if (currentParam === filter) return setParams({ a: '1' });
+  const pushParams = (filter: string) => {
+    if (!filter) return setParams({ filter: '전체' });
 
     setParams({ filter });
   };
 
-  return pushParams;
+  return { currentParam, pushParams };
 }
