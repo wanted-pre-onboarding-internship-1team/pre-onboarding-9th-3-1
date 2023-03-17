@@ -1,13 +1,16 @@
 import Chart from '../components/Chart';
 import ChartHeader from '../components/ChartHeader';
+import { DataProvider } from '../contexts/DataContext';
 import styled from 'styled-components';
 
 export default function Mainpage() {
   return (
-    <Container>
-      <ChartHeader />
-      <Chart />
-    </Container>
+    <DataProvider>
+      <Container>
+        <ChartHeader />
+        <Chart />
+      </Container>
+    </DataProvider>
   );
 }
 

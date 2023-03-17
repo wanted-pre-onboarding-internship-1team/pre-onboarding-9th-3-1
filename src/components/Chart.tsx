@@ -1,18 +1,13 @@
+import { useDataIDContext, useDataValueContext } from '../contexts/DataContext';
 import useMockList from '../hooks/useMockList';
 import { ApexOptions } from 'apexcharts';
 import ApexCharts from 'react-apexcharts';
 import styled from 'styled-components';
 
 export default function Chart() {
-  const {
-    timeList,
-    idList,
-    barValueList,
-    areaValueList,
-    selectedID,
-    setSelectID,
-    idSet,
-  } = useMockList();
+  const { timeList, idList, barValueList, areaValueList } =
+    useDataValueContext();
+  const { selectedID } = useDataIDContext();
   const series = [
     {
       name: 'area',
@@ -26,18 +21,8 @@ export default function Chart() {
     },
   ];
   const chartOptions: ApexOptions = {
-    chart: {
-      events: {
-        dataPointSelection: (event, chartContext, config) => {
-          const index = config.dataPointIndex;
-          console.log(index);
-        },
-      },
-    },
     fill: {
-      //   type: 'gradient',
       gradient: {
-        // shade: 'light',
         type: 'vertical',
         shadeIntensity: 1,
         opacityFrom: 0.1,
@@ -81,9 +66,7 @@ export default function Chart() {
       },
     },
     colors: [
-      function ({ dataPointIndex }: unknown) {
-        return '#66C7F4';
-      },
+      '#66C7F4',
       function ({ dataPointIndex }: unknown) {
         if (idList[dataPointIndex] === selectedID) {
           return '#FF0000';
@@ -107,7 +90,7 @@ export default function Chart() {
   };
   return (
     <Container>
-      {Array.from(idSet).map(id => {
+      {/* {Array.from(idSet).map(id => {
         return (
           <button
             key={id}
@@ -117,7 +100,7 @@ export default function Chart() {
             {id}
           </button>
         );
-      })}
+      })} */}
       <ApexCharts options={chartOptions} series={series} height={600} />
     </Container>
   );
