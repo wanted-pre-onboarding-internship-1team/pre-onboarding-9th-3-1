@@ -1,5 +1,6 @@
 import { CHART_COLOR } from '../constants/colors';
 import useMockList from '../hooks/useMockList';
+import createCustomTooltip from '../utils/createCustomTooltip';
 import useFilterList from './../hooks/useFilterList';
 import { ApexOptions } from 'apexcharts';
 import ApexCharts from 'react-apexcharts';
@@ -158,14 +159,8 @@ export default function Chart() {
       },
     },
     tooltip: {
-      custom: (opt: any) =>
-        createCustomTooltip({
-          opt,
-          timeList,
-          barValueList,
-          areaValueList,
-          idList,
-        }),
+      // shared: true,
+      custom: options => createCustomTooltip({ options, idList, timeList }),
     },
     annotations: {
       points: setPoints(),
@@ -179,54 +174,7 @@ export default function Chart() {
   );
 }
 
-function createCustomTooltip({
-  opt,
-  timeList,
-  barValueList,
-  areaValueList,
-  idList,
-}: {
-  opt: any;
-  timeList: string[];
-  barValueList: number[];
-  areaValueList: number[];
-  idList: string[];
-}) {
-  const index = opt.dataPointIndex;
-  return `
-  <ul class='arrow-box'>
-    <li class='arrow-box__item'>
-      ${timeList[index]}
-    </li>
-    <li class='arrow-box__item'>
-      <div style="background:${opt.w.config.legend.markers.fillColors[0]}; width:10px; height:10px; border-radius:10px"></div>
-      <div>area: </div>
-      <div>${areaValueList[index]}</div>
-    </li>
-    <li class='arrow-box__item'>
-      <div style="background:${opt.w.config.legend.markers.fillColors[1]}; width:10px; height:10px; border-radius:10px"></div>
-      <div>bar: </div>
-      <div>${barValueList[index]}</div>
-    </li>
-    <li class='arrow-box__item'>
-      <div>지역: </div>
-      <div>${idList[index]}</div>
-    </li>
-  </ul>
-  `;
-}
-
 const Container = styled.div`
   width: 100%;
   max-width: 1200px;
-
-  .arrow-box li {
-    padding: 5px 10px;
-  }
-
-  .arrow-box__item {
-    display: flex;
-    gap: 5px;
-    align-items: center;
-  }
 `;
