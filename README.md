@@ -1,10 +1,9 @@
 # 원티드 프리온보딩 Week3 기업과제 - 플렉시스
 
-
-
 <br />
 
 ## ✏️ 과제 설명
+
 주어진 데이터를 기반으로 시계열 차트 만들기
 
 <br />
@@ -20,6 +19,7 @@ npm start
 <br />
 
 ## 📌 배포 링크
+
 http://wanted-intenship-project2.s3-website.ap-northeast-2.amazonaws.com/
 
 <br />
@@ -33,9 +33,35 @@ http://wanted-intenship-project2.s3-website.ap-northeast-2.amazonaws.com/
 ## 🎄 폴더 구조
 
 ```
-📄 src
-├── App.js
-├── index.js
+📄.src
+├── App.tsx
+├── apis
+│   ├── index.ts
+│   ├── instance.ts
+│   ├── mockService.ts
+│   └── types
+│       └── mock.ts
+├── components
+│   ├── chart
+│   │   ├── Chart.tsx
+│   │   ├── ChartHeader.tsx
+│   │   └── types
+│   │       └── Points.ts
+│   └── filter
+│       ├── Filter.tsx
+│       └── types
+│           └── StyleProps.ts
+├── constants
+│   └── colors.ts
+├── hooks
+│   ├── useMockList.ts
+│   └── useQuerystring.ts
+├── index.css
+├── index.tsx
+├── pages
+│   └── Mainpage.tsx
+└── router
+    └── router.tsx
 ```
 
 <br />
@@ -59,8 +85,8 @@ http://wanted-intenship-project2.s3-website.ap-northeast-2.amazonaws.com/
 ## ⭐️ 과제 구현 및 Best Practice 산정
 
 ### 전반적인 프로젝트
-> - 
-> - 
+
+> - 추가 플러그인을 사용하지 않아 번들크기가 가볍고 기본기능이 많아서 `ApexCharts` 사용
 > - AWS S3를 통해 배포하여 CI/CD 자동화 배포를 구축
 
 <br />
@@ -73,10 +99,9 @@ http://wanted-intenship-project2.s3-website.ap-northeast-2.amazonaws.com/
 - Bar 그래프의 기준값은 value_bar 값을 이용해주세요
 - 차트의 Y축에 대략적인 수치를 표현해주세요(예시 이미지 참고)
 
-![image](https://user-images.githubusercontent.com/65064563/224611161-6bd6cec3-b947-4801-a8e6-0a936d50d99f.png)
-
->  **💡 Best Practice 산정 이유**
-> - 
+> **💡 Best Practice 산정 이유**
+>
+> -
 
 <br />
     
@@ -86,24 +111,23 @@ http://wanted-intenship-project2.s3-website.ap-northeast-2.amazonaws.com/
 
 <br/>
 
->  **💡 Best Practice 산정 이유**
-> - 
-> - 
+> **💡 Best Practice 산정 이유**
+>
+> -
+> -
 
-
- #### ✅ Assignment 3
+#### ✅ Assignment 3
 
 - 필터링 기능을 구현해주세요, 필터링은 특정 데이터를 하이라이트 하는 방식으로 구현해주세요
 - 필터링 기능은 버튼 형태로 ID값(지역이름)을 이용해주세요
 - 필터링 시 버튼에서 선택한 ID값과 동일한 ID값을 가진 데이터 구역만 하이라이트 처리를 해주세요
 - 특정 데이터 구역을 클릭 시에도 필터링 기능과 동일한 형태로 동일한 ID값을 가진 데이터 구역을 하이라이트해주세요
 
-
->  **💡 Best Practice 산정 이유**
-> - 
+> **💡 Best Practice 산정 이유**
+>
+> -
 
 <br />
-
 
 ## 💗 팀원 소개
 

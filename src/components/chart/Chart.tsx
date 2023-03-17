@@ -1,6 +1,8 @@
+import { CHART_COLOR } from '../../constants/colors';
 import useMockList from '../../hooks/useMockList';
 import useQuerystring from '../../hooks/useQuerystring';
 import Filter from '../filter/Filter';
+import { Points } from './types/Points';
 import { ApexOptions } from 'apexcharts';
 import React from 'react';
 import { useState } from 'react';
@@ -13,6 +15,36 @@ export default function Chart() {
   const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
 
   const { queries, addQuery, deleteQuery } = useQuerystring();
+
+  const setPoints = () => {
+    const defaultOptions = {
+      seriesIndex: 0,
+      marker: {
+        size: 4,
+        strokeColor: CHART_COLOR.areaPoint,
+        radius: 2,
+      },
+      label: {
+        borderColor: CHART_COLOR.areaPoint,
+        offsetY: 0,
+      },
+    };
+    const newOptions = idList.reduce<Points[]>((acc, crr, idx) => {
+      const option = {
+        ...defaultOptions,
+        x: timeList[idx],
+        y: Math.min(95, areaValueList[idx]),
+        label: { ...defaultOptions.label, text: crr },
+      };
+      for (const querry of queries) {
+        if (crr === querry) acc.push(option);
+      }
+
+      return acc;
+    }, []);
+
+    return newOptions;
+  };
 
   const series = [
     {
@@ -50,6 +82,11 @@ export default function Chart() {
             ? deleteQuery(clickLocalData)
             : addQuery(clickLocalData);
         },
+        updated: (chartContext, config) => {
+          const isAreaActive = !!config.config.series[0].data.length;
+
+          if (!isAreaActive) chartContext.clearAnnotations();
+        },
       },
     },
     stroke: {
@@ -81,6 +118,9 @@ export default function Chart() {
         title: {
           text: 'Area',
         },
+        tooltip: {
+          enabled: true,
+        },
       },
       {
         opposite: true,
@@ -93,6 +133,9 @@ export default function Chart() {
         },
         title: {
           text: 'Bar',
+        },
+        tooltip: {
+          enabled: true,
         },
       },
     ],
@@ -123,6 +166,9 @@ export default function Chart() {
           idList,
           queries,
         }),
+    },
+    annotations: {
+      points: setPoints(),
     },
   };
 
