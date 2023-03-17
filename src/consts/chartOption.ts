@@ -35,16 +35,6 @@ export const barYaxis = {
   },
 };
 
-// export const xaxis = (timeList: string[]) => {
-//   return {
-//     categories: timeList,
-//     tickAmount: 6,
-//     labels: {
-//       rotate: 0,
-//     },
-//   };
-// };
-
 export const stroke = {
   width: [2, 1],
 };
